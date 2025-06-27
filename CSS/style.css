@@ -1,0 +1,635 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --font-01: Verdana, Geneva, Tahoma, sans-serif;
+    --font-02: 'Times New Roman', Times, serif;
+    --font-03:'Parisienne', cursive;
+    --global-color-0: #EADED0; /* Background color */
+    --global-color-1: #8C9A8C; /* Main accent color (e.g., links, buttons) */
+    --global-color-2: #C7AF94; /* Secondary accent color (e.g., hover states) */
+    --global-color-white: #FFFFFF; /* Added for explicit white */
+    --global-color-light-gray: #F9F9F9; /* Added for footer/light backgrounds */
+    --global-color-border: #E0E0E0; /* For borders */
+    --global-color-dark-gray: #666; /* For general text */
+    --global-color-black: #000; /* For hover text */
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--global-color-0); /* Using variable */
+    color: #333; /* Default text color */
+}
+
+/* --- Section Spacing --- */
+section {
+    margin-top: 80px; /* Default spacing between sections */
+}
+
+.intro-banner {
+    margin-top: 0; /* Ensure the first section has no top margin */
+}
+
+.section-title {
+    margin-top: 80px; /* Spacing for custom section titles */
+}
+
+footer {
+    margin-top: 80px; /* Consistent spacing before footer */
+}
+
+
+/* ===== Header Navbar ===== */
+header {
+    background-color: var(--global-color-white); /* Using variable */
+    border-bottom: 1px solid var(--global-color-border); /* Using variable */
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--global-color-1); /* Using variable */
+}
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: var(--global-color-1); /* Using variable */
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--global-color-2); /* Using variable */
+}
+
+#cart-count {
+    background: var(--global-color-1); /* Using variable */
+    color: var(--global-color-white); /* Using variable */
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+
+
+/* ===== Intro Banner (Above Slider) ===== */
+.intro-banner {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: adds a parallax effect */
+    height: 70vh; /* Use viewport height for responsiveness, e.g., 70% of viewport height */
+    min-height: 450px; /* Ensure a minimum height on very small screens */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--global-color-white); /* Using variable */
+    position: relative; /* IMPORTANT: Ensures ::before positions correctly relative to this parent */
+    overflow: hidden; /* Important if your background image extends beyond */
+}
+
+/* Dark overlay for readability */
+.intro-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* NOW COVERS THE WHOLE BANNER */
+    background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for better text contrast */
+    z-index: 1;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2; /* Ensures content is above the overlay */
+    max-width: 800px; /* Limit width for readability */
+    padding: 20px; /* Add some padding on smaller screens */
+}
+
+.intro-content h2 {
+    font-size: clamp(2.5em, 5vw, 4.5em); /* Responsive font size */
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow for pop */
+    font-family: var(--font-01); /* Using variable */
+    font-weight: bold;
+}
+
+.intro-content p {
+    font-size: clamp(1em, 2vw, 1.3em); /* Responsive font size */
+    margin-bottom: 30px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-01); /* Using variable */
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: var(--global-color-1); /* Using variable */
+    color: var(--global-color-white); /* Using variable */
+    padding: 15px 35px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-button:hover {
+    background-color: var(--global-color-2); /* Using variable */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ===== Brand Story Section ===== */
+.brand-story {
+    /*background-color: var(--global-color-white); /* White background for contrast */
+    padding: 80px 30px; /* Generous padding */
+    text-align: center;
+}
+
+.brand-story .story-content {
+    max-width: 900px; /* Limit width for readability of long text */
+    margin: 0 auto; /* Center the content */
+    color: #333; /* Darker text for readability on white background */
+}
+
+.brand-story h2 {
+    font-size: clamp(1.8em, 3.5vw, 2.5em); /* Responsive font size */
+    margin-bottom: 25px;
+    margin-top: 100px;
+    font-family: var(--font-01); /* Your primary font */
+    font-weight: bold;
+    color: var(--global-color-1); /* Dark color for heading */
+    position: relative; /* For the optional underline */
+    display: inline-block; /* For centering underline */
+}
+
+/* Optional: Add a subtle underline to the h2 for emphasis, similar to other section titles */
+.brand-story h2::after {
+    content: '';
+    display: block;
+    width: 80px; /* Slightly longer underline for this key heading */
+    height: 3px;
+    background: var(--global-color-1); /* Your accent color */
+    margin: 15px auto 0; /* Space below heading */
+    border-radius: 2px;
+}
+
+.brand-story p {
+    font-size: clamp(1em, 1.8vw, 1.15em); /* Responsive paragraph font size */
+    line-height: 1.8; /* Improved line spacing for readability */
+    color: var(--global-color-1); /* Lighter dark gray for body text */
+    font-family: var(--font-03);
+    font-size: 34px;
+    
+    font-weight: bold;
+}
+
+/* Media queries for smaller screens if needed (though clamp() handles much) */
+@media (max-width: 768px) {
+    .brand-story {
+        padding: 60px 20px; /* Reduce padding on mobile */
+    }
+
+    .brand-story h2 {
+        margin-bottom: 20px;
+    }
+
+    .brand-story h2::after {
+        margin-top: 10px;
+    }
+}
+
+
+
+/* --- Section Titles (e.g., "Our Best Sellers", "Explore Our Collection") --- */
+.section-title {
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 20px; /* Spacing below this title */
+}
+
+.section-title h2,
+.featured h2 { /* Apply similar styles to existing h2 in featured section */
+    font-size: 32px;
+    color:var(--global-color-1);
+    font-family: var(--font-01);
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    
+}
+
+.section-title h2::after,
+.featured h2::after { /* Apply consistent underline to both */
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--global-color-1); /* Using variable */
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+
+/* ===== Carousel ===== */
+.carousel {
+    width: 100%;
+    background: var(--global-color-0); /* Using variable */
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* overflow: visible; REMOVED/OVERRIDDEN BY .carousel-window */
+    position: relative;
+}
+
+.carousel-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-window {
+    width: 90%; /* Responsive width for the visible area */
+    max-width: 1200px; /* Limits the max width on very large screens */
+    overflow: hidden; /* IMPORTANT: Hides content outside the window */
+    margin: 0 auto; /* Centers the window itself */
+    position: relative; /* Needed if you add navigation arrows later */
+    /* REMOVED: hardcoded calc width */
+}
+
+.carousel-track {
+    display: flex;
+    gap: 40px;
+    transition: transform 0.5s ease-in-out;
+    align-items: center;
+    /* REMOVED: width: max-content; */
+    /* REMOVED: position: relative; */
+    /* REMOVED: left: 0; */
+}
+
+
+.carousel-image {
+    width: 450px; /* Keep your initial image width for desktop, will scale with JS */
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    filter: brightness(40%);
+    flex-shrink: 0;
+    transform: scale(0.9);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.carousel-image.active {
+    filter: brightness(100%);
+    transform: scale(1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-dots {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.carousel-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 6px;
+    background-color: #bbb; /* Can be a variable */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-dot.active {
+    background-color: var(--global-color-1); /* Using variable */
+}
+
+/* Carousel Navigation Buttons (dynamically added by JS) */
+.carousel-nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    color: var(--global-color-white); /* Using variable */
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-nav-button:hover {
+    opacity: 1;
+}
+
+.carousel-nav-button.prev {
+    left: 10px;
+}
+
+.carousel-nav-button.next {
+    right: 10px;
+}
+
+
+/* ===== Featured Section ===== */
+.featured {
+    padding: 60px 30px;
+    text-align: center;
+    /* h2 styling moved to .section-title h2 */
+}
+
+/* Updated to use .section-title h2 for consistency */
+.featured h2 {
+    margin-bottom: 40px;
+    color:var(--global-color-1); /* Keep specific margin for this h2 */
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.category-card {
+    background-color: var(--global-color-0); /* Using variable */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-card img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.category-card h3 {
+    margin: 15px 0;
+    font-size: 18px;
+    color: var(--global-color-1);
+}
+
+/* ===== Footer (Merged with Contact Info) ===== */
+footer {
+    background-color: var(--global-color-light-gray);
+    padding: 60px 30px; /* More padding for a larger footer */
+    border-top: 1px solid var(--global-color-border);
+    color: var(--global-color-dark-gray); /* Default text color for footer */
+    line-height: 1.6;
+    text-align: left; /* Default to left-aligned text within columns */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid; /* Use CSS Grid for robust column layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-fit columns */
+    gap: 30px; /* Gap between grid columns */
+    justify-content: space-between; /* Distribute columns */
+    align-items: flex-start; /* Align columns to the top */
+}
+
+.footer-col {
+    padding: 10px 0; /* Some internal padding */
+}
+
+.footer-col h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Darker heading color */
+    font-family: var(--font-01);
+}
+
+/* Logo Column */
+.footer-col.footer-logo-col .logo a {
+    font-size: 28px; /* Larger logo in footer */
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--global-color-1); /* Accent color for logo */
+    margin-bottom: 15px;
+    display: block; /* Make it a block for margin */
+}
+
+.footer-col.footer-logo-col .copyright-desktop {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--global-color-dark-gray);
+}
+
+.copyright-mobile {
+    display: none; /* Hidden by default on desktop */
+}
+
+
+/* Contact Column */
+.footer-col.footer-contact-col p {
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.footer-col.footer-contact-col i {
+    margin-right: 10px;
+    color: var(--global-color-1); /* Accent color for icons */
+    font-size: 1.1em;
+}
+
+/* Quick Links Column */
+.footer-col.footer-links-col ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col.footer-links-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col.footer-links-col ul li a {
+    color: var(--global-color-dark-gray);
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.3s ease;
+}
+
+.footer-col.footer-links-col ul li a:hover {
+    color: var(--global-color-1); /* Accent color on hover */
+}
+
+
+/* Social Column */
+.footer-col.footer-social-col .social-icons {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    justify-content: flex-start; /* Align to start in desktop columns */
+}
+
+.footer-col.footer-social-col .social-icon-link {
+    color: var(--global-color-1); /* Accent color for social icons */
+    font-size: 26px; /* Larger social icons */
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Remove underline */
+    display: inline-flex; /* Helps with alignment if text is also present */
+    align-items: center;
+}
+/* If you want text next to social icons, remove the text-indent */
+.footer-col.footer-social-col .social-icon-link i {
+    margin-right: 0; /* Remove icon margin if only icon is there */
+}
+
+.footer-col.footer-social-col .social-icon-link:hover {
+    color: var(--global-color-2); /* Secondary accent on hover */
+    transform: translateY(-2px);
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust columns for tablets */
+    }
+}
+
+@media (max-width: 768px) {
+    footer {
+        padding: 40px 20px; /* Reduce padding on mobile */
+        text-align: center; /* Center everything on mobile */
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr; /* Stack columns on mobile */
+        gap: 40px; /* More space between stacked columns */
+    }
+
+    .footer-col {
+        padding: 0; /* Remove column internal padding on mobile */
+    }
+
+    .footer-col h3 {
+        margin-bottom: 15px; /* Adjust heading margin */
+    }
+
+    .footer-col.footer-logo-col .logo a {
+        margin-bottom: 5px; /* Adjust logo margin */
+    }
+
+    .footer-col.footer-logo-col .copyright-desktop {
+        display: none; /* Hide desktop copyright */
+    }
+
+    .copyright-mobile {
+        display: block; /* Show mobile copyright */
+        font-size: 0.9em;
+        color: var(--global-color-dark-gray);
+        margin-top: 30px; /* Space above mobile copyright */
+    }
+
+    .footer-col.footer-social-col .social-icons {
+        justify-content: center; /* Center social icons on mobile */
+    }
+}
+
+/* Optional: Media queries for smaller screens - already had some, refined */
+@media (max-width: 768px) {
+    header {
+        padding: 10px 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-left: 0;
+    }
+
+    .nav-links a {
+        margin-left: 0; /* Override individual margin */
+    }
+
+    .intro-banner {
+        height: 60vh;
+        min-height: 350px; /* Smaller min-height for mobile */
+    }
+
+    .intro-content h2 {
+        font-size: clamp(2em, 7vw, 3.5em);
+    }
+
+    .intro-content p {
+        font-size: clamp(0.9em, 2.5vw, 1.1em);
+    }
+
+    .hero-button {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+
+    .section-title h2,
+    .featured h2 {
+        font-size: 28px; /* Slightly smaller for mobile */
+    }
+
+    .carousel-image {
+        width: 300px; /* Adjust image width for mobile view */
+        height: 200px; /* Adjust height */
+    }
+    
+    .carousel-nav-button {
+        padding: 8px 12px;
+        font-size: 20px;
+    }
+
+    .featured {
+        padding: 40px 20px;
+    }
+
+    .category-card img {
+        height: 200px; /* Adjust height for category images */
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 10px;
+    }
+}
