@@ -196,17 +196,25 @@ async function handlePlaceOrder(event) { // Added 'async' keyword here
         const yourWhatsappNumber = '+96176829297'; 
         const whatsappURL = `https://wa.me/${yourWhatsappNumber}?text=${encodedMessage}`;
 
-        // Open WhatsApp in a new tab
-        window.open(whatsappURL, '_blank');
+// Open WhatsApp in a new tab
+const newWindow = window.open(whatsappURL, '_blank');
 
-        // Optionally: Clear cart after the order is initiated via WhatsApp AND saved to DB
-        localStorage.removeItem('cart');
-        updateCartCount(); // Update navbar count to 0
+// Clear cart immediately
+localStorage.removeItem('cart');
+updateCartCount(); // Update navbar count to 0
 
-        alert('Your order has been placed and details prepared for WhatsApp! Please send the message to confirm your order. We will contact you shortly.');
-        
-        // Redirect back to shop or a thank you page
+// Delay the alert and redirect slightly to give the browser time to open WhatsApp
+setTimeout(() => {
+    alert('Your order has been placed and details prepared for WhatsApp! Please send the message to confirm your order. We will contact you shortly.');
+    // Redirect back to shop or a thank you page
+    // Only redirect if the new WhatsApp window was actually opened (though this is best effort)
+    if (newWindow && !newWindow.closed) { // Check if the window is still open or was successfully launched
+         window.location.href = 'shop.html';
+    } else {
+        // Fallback if the new window was blocked/closed immediately
         window.location.href = 'shop.html';
+    }
+}, 500); // 500 milliseconds (0.5 seconds) delay
 
     } catch (error) {
         console.error("Error saving order: ", error);
