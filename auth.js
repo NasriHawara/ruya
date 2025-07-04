@@ -18,7 +18,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // Import common functions
-import { updateCartCount } from './common.js';
+import { updateCartCount } from 'common.js';
 
 // Initialize Firebase services
 const app = getApp(); // Assumes Firebase app is initialized in HTML
@@ -64,7 +64,7 @@ if (loginForm) {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log('User logged in successfully!');
-            window.location.href = '/Html/index.html'; // Redirect to home page
+            window.location.href = 'index.html'; // Redirect to home page
         } catch (error) {
             console.error('Login error:', error.message);
             let errorMessage = 'Login failed. Please check your email and password.';
@@ -127,7 +127,7 @@ if (signupForm) {
             console.log('User profile saved to Firestore!');
 
             alert('Account created successfully! You are now logged in.');
-            window.location.href = '/Html/index.html'; // Redirect to home
+            window.location.href = 'index.html'; // Redirect to home
         } catch (error) {
             console.error('Signup error:', error.message);
             let errorMessage = 'Account creation failed.';
@@ -180,7 +180,7 @@ onAuthStateChanged(auth, async (user) => {
             displayName = userData.firstName || user.email; // Use first name if available
             
             // If on checkout page, pre-fill form
-            if (window.location.pathname.includes('/Html/checkout.html')) {
+            if (window.location.pathname.includes('checkout.html')) {
                 const firstNameInput = document.getElementById('first-name');
                 const lastNameInput = document.getElementById('last-name');
                 const emailInput = document.getElementById('email');
@@ -213,7 +213,7 @@ onAuthStateChanged(auth, async (user) => {
 
         // Update navbar for logged-in state (Profile link)
         if (authLink) {
-            authLink.href = '/Html/profile.html'; // Link to the new profile page
+            authLink.href = 'profile.html'; // Link to the new profile page
             authLink.textContent = 'Profile'; // Change text to "Profile"
             authLink.onclick = null; // No direct logout from this link
         }
@@ -224,13 +224,13 @@ onAuthStateChanged(auth, async (user) => {
 
         // Update navbar for logged-out state (Login link)
         if (authLink) {
-            authLink.href = '/Html/login.html'; // Link back to the login page
+            authLink.href = 'login.html'; // Link back to the login page
             authLink.textContent = 'Login'; // Change text back to "Login"
             authLink.onclick = null; // No click listener
         }
 
         // If on checkout page, ensure fields are editable if not logged in
-        if (window.location.pathname.includes('/Html/checkout.html')) {
+        if (window.location.pathname.includes('checkout.html')) {
             const checkoutForm = document.getElementById('checkout-form'); // Assuming you have a form ID
             if (checkoutForm) {
                 const inputs = checkoutForm.querySelectorAll('input');
