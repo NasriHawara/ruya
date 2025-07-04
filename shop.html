@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shop - Ruءya Eyewear</title>
+    <link rel="stylesheet" href="/CSS/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAAo_jXW1bMCjsUlW8wSeT4zoaXyw5JFVU",
+            authDomain: "ruya-eyewear-e-commerce.firebaseapp.com",
+            projectId: "ruya-eyewear-e-commerce",
+            storageBucket: "ruya-eyewear-e-commerce.firebasestorage.app",
+            messagingSenderId: "963912557816",
+            appId: "1:963912557816:web:81bfb191bc8f2c1e19c70d"
+        };
+
+        // Initialize Firebase
+        if (getApps().length === 0) { // Check if app is already initialized
+            initializeApp(firebaseConfig);
+        }
+    </script>
+</head>
+
+<body>
+
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">Ruءya Eyewear</a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+
+                <span id="user-display-name" style="display:none;"></span>
+                <a href="Html/login.html" id="auth-link">Login</a>
+                <a href="cart.html" class="cart-link">
+                    Cart <span id="cart-count">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="shop-main-content">
+        <section class="shop-banner">
+            <div class="banner-content">
+                <h1>Elevate Your Vision. Elevate Your Style.</h1>
+                <p>Find the perfect pair that reflects who you are, with Ruءya Eyewear.</p>
+            </div>
+        </section>
+
+        <div class="shop-layout-container">
+            <aside class="shop-sidebar">
+                <h3>Filter Products</h3>
+
+                <div class="filter-group">
+                    <details open>
+                        <summary>Category</summary>
+                        <ul>
+                            <li><label><input type="checkbox" value="men"> Men's</label></li>
+                            <li><label><input type="checkbox" value="women"> Women's</label></li>
+                            <li><label><input type="checkbox" value="kids"> Kids</label></li>
+                        </ul>
+                    </details>
+                </div>
+
+                <button class="apply-filters-btn">Apply Filters</button>
+
+            </aside>
+
+            <section class="product-display-area">
+                <div class="products-top-bar">
+                    <div class="results-count">Showing 1-12 of 30 results</div>
+                    <div class="sort-options">
+                        <label for="sort-by">Sort By:</label>
+                        <select id="sort-by">
+                            <option value="default">Default Sorting</option>
+                            <option value="newness">Sort by Newness</option>
+                            <option value="price-asc">Sort by Price: Low to High</option>
+                            <option value="price-desc">Sort by Price: High to Low</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="product-grid" id="products-container">
+                    <p style="text-align: center; padding: 20px; grid-column: 1 / -1;">Loading products...</p>
+                </div>
+
+                <nav class="pagination">
+                    <a href="#" class="page-link prev-page"><i class="fas fa-angle-left"></i></a>
+                    <a href="#" class="page-link active">1</a>
+                    <a href="#" class="page-link">2</a>
+                    <a href="#" class="page-link">3</a>
+                    <a href="#" class="page-link next-page"><i class="fas fa-angle-right"></i></a>
+                </nav>
+            </section>
+        </div>
+    </main>
+
+    <script src="/JS/shop.js" type="module"></script>
+    <script src="/JS/auth.js" type="module"></script>
+    <script src="/JS/common.js" type="module"></script>
+</body>
+
+</html>

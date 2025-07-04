@@ -1,0 +1,3008 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+:root {
+    --font-01: Verdana, Geneva, Tahoma, sans-serif;
+    --font-02: 'Times New Roman', Times, serif;
+    --font-03:'Parisienne', cursive;
+    --global-color-0: #EADED0; /* Background color */
+    --global-color-1: #8C9A8C; /* Main accent color (e.g., links, buttons) */
+    --global-color-2: #C7AF94; /* Secondary accent color (e.g., hover states) */
+    --global-color-white: #FFFFFF; /* Added for explicit white */
+    --global-color-light-gray: #F9F9F9; /* Added for footer/light backgrounds */
+    --global-color-border: #E0E0E0; /* For borders */
+    --global-color-dark-gray: #666; /* For general text */
+    --global-color-black: #000; /* For hover text */
+}
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: var(--global-color-0); /* Using variable */
+    color: #333; /* Default text color */
+}
+
+/* --- Section Spacing --- */
+section {
+    margin-top: 80px; /* Default spacing between sections */
+}
+
+.intro-banner {
+    margin-top: 0; /* Ensure the first section has no top margin */
+}
+
+.section-title {
+    margin-top: 80px; /* Spacing for custom section titles */
+}
+
+footer {
+    margin-top: 80px; /* Consistent spacing before footer */
+}
+
+
+/* ===== Header Navbar ===== */
+header {
+    background-color: var(--global-color-white); /* Using variable */
+    border-bottom: 1px solid var(--global-color-border); /* Using variable */
+    padding: 15px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.logo a {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--global-color-1); /* Using variable */
+}
+
+.nav-links a {
+    margin-left: 25px;
+    text-decoration: none;
+    color: var(--global-color-1); /* Using variable */
+    font-weight: 500;
+    transition: 0.3s;
+    font-size: 17px;
+}
+
+.nav-links a:hover {
+    color: var(--global-color-2); /* Using variable */
+}
+
+#cart-count {
+    background: var(--global-color-1); /* Using variable */
+    color: var(--global-color-white); /* Using variable */
+    padding: 2px 8px;
+    border-radius: 50%;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+
+
+/* ===== Intro Banner (Above Slider) ===== */
+.intro-banner {
+    background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: adds a parallax effect */
+    height: 70vh; /* Use viewport height for responsiveness, e.g., 70% of viewport height */
+    min-height: 450px; /* Ensure a minimum height on very small screens */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: var(--global-color-white); /* Using variable */
+    position: relative; /* IMPORTANT: Ensures ::before positions correctly relative to this parent */
+    overflow: hidden; /* Important if your background image extends beyond */
+}
+
+/* Dark overlay for readability */
+.intro-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* NOW COVERS THE WHOLE BANNER */
+    background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for better text contrast */
+    z-index: 1;
+}
+
+.intro-content {
+    position: relative;
+    z-index: 2; /* Ensures content is above the overlay */
+    max-width: 800px; /* Limit width for readability */
+    padding: 20px; /* Add some padding on smaller screens */
+}
+
+.intro-content h2 {
+    font-size: clamp(2.5em, 5vw, 4.5em); /* Responsive font size */
+    margin-bottom: 15px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow for pop */
+    font-family: var(--font-01); /* Using variable */
+    font-weight: bold;
+}
+
+.intro-content p {
+    font-size: clamp(1em, 2vw, 1.3em); /* Responsive font size */
+    margin-bottom: 30px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    font-family: var(--font-01); /* Using variable */
+}
+
+.hero-button {
+    display: inline-block;
+    background-color: var(--global-color-1); /* Using variable */
+    color: var(--global-color-white); /* Using variable */
+    padding: 15px 35px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.hero-button:hover {
+    background-color: var(--global-color-2); /* Using variable */
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+/* ===== Brand Story Section ===== */
+.brand-story {
+    padding: 80px 30px; /* Generous padding */
+    text-align: center;
+}
+
+.brand-story .story-content {
+    max-width: 900px; /* Limit width for readability of long text */
+    margin: 0 auto; /* Center the content */
+    color: #333; /* Darker text for readability on white background */
+}
+
+.brand-story h2 {
+    font-size: clamp(1.8em, 3.5vw, 2em); /* Responsive font size */
+    margin-bottom: 25px;
+    margin-top: 100px;
+    font-family: var(--font-01); /* Your primary font */
+    font-weight: bold;
+    color: var(--global-color-1); /* Dark color for heading */
+    position: relative; /* For the optional underline */
+    display: inline-block; /* For centering underline */
+}
+
+/* Optional: Add a subtle underline to the h2 for emphasis, similar to other section titles */
+.brand-story h2::after {
+    content: '';
+    display: block;
+    width: 80px; /* Slightly longer underline for this key heading */
+    height: 3px;
+    background: var(--global-color-1); /* Your accent color */
+    margin: 15px auto 0; /* Space below heading */
+    border-radius: 2px;
+}
+
+.brand-story p {
+    font-size: clamp(1em, 1.8vw, 1.5em); /* Responsive paragraph font size */
+    line-height: 1.8; /* Improved line spacing for readability */
+    color: var(--global-color-1); /* Lighter dark gray for body text */
+    font-family: var(--font-01);
+    text-decoration: dashed; /* This might be unusual, confirm if intended */
+}
+
+
+/* --- Section Titles (e.g., "Our Best Sellers", "Explore Our Collection") --- */
+.section-title {
+    text-align: center;
+    margin-top: 200px;
+    margin-bottom: 20px; /* Spacing below this title */
+}
+
+.section-title h2,
+.featured h2 { /* Apply similar styles to existing h2 in featured section */
+    font-size: 32px;
+    color:var(--global-color-1);
+    font-family: var(--font-01);
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title h2::after,
+.featured h2::after { /* Apply consistent underline to both */
+    content: '';
+    display: block;
+    width: 60px;
+    height: 3px;
+    background: var(--global-color-1); /* Using variable */
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+
+/* ===== Carousel ===== */
+.carousel {
+    width: 100%;
+    background: var(--global-color-0); /* Using variable */
+    padding: 50px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.carousel-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.carousel-window {
+    width: 90%; /* Responsive width for the visible area */
+    max-width: 1200px; /* Limits the max width on very large screens */
+    overflow: hidden; /* IMPORTANT: Hides content outside the window */
+    margin: 0 auto; /* Centers the window itself */
+    position: relative; /* Needed if you add navigation arrows later */
+}
+
+.carousel-track {
+    display: flex;
+    gap: 40px;
+    transition: transform 0.5s ease-in-out;
+    align-items: center;
+}
+
+.carousel-image {
+    width: 450px; /* Keep your initial image width for desktop, will scale with JS */
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    filter: brightness(40%);
+    flex-shrink: 0;
+    transform: scale(0.9);
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.carousel-image.active {
+    filter: brightness(100%);
+    transform: scale(1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-dots {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.carousel-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    margin: 0 6px;
+    background-color: #bbb; /* Can be a variable */
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-dot.active {
+    background-color: var(--global-color-1); /* Using variable */
+}
+
+/* Carousel Navigation Buttons (dynamically added by JS) */
+.carousel-nav-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    color: var(--global-color-white); /* Using variable */
+    border: none;
+    padding: 10px 15px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.carousel-nav-button:hover {
+    opacity: 1;
+}
+
+.carousel-nav-button.prev {
+    left: 10px;
+}
+
+.carousel-nav-button.next {
+    right: 10px;
+}
+
+
+/* ===== Featured Section ===== */
+.featured {
+    padding: 60px 30px;
+    text-align: center;
+}
+
+/* Updated to use .section-title h2 for consistency */
+.featured h2 {
+    margin-bottom: 40px;
+    color:var(--global-color-1); /* Keep specific margin for this h2 */
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+/* --- NEW: Style for the category links --- */
+.category-link {
+    text-decoration: none; /* Removes the underline from the link */
+    color: inherit; /* Inherits the text color from its parent (category-card h3) */
+    display: block; /* Makes the entire card clickable */
+}
+
+.category-card {
+    background-color: var(--global-color-0); /* Using variable */
+    border-radius: 8px;
+    overflow: hidden;
+    transition: 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.category-card img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+}
+
+.category-card h3 {
+    margin: 15px 0;
+    font-size: 18px;
+    color: var(--global-color-1);
+}
+
+/* ===== Footer (Merged with Contact Info) ===== */
+footer {
+    background-color: var(--global-color-light-gray);
+    padding: 60px 30px; /* More padding for a larger footer */
+    border-top: 1px solid var(--global-color-border);
+    color: var(--global-color-dark-gray); /* Default text color for footer */
+    line-height: 1.6;
+    text-align: left; /* Default to left-aligned text within columns */
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid; /* Use CSS Grid for robust column layout */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Auto-fit columns */
+    gap: 30px; /* Gap between grid columns */
+    justify-content: space-between; /* Distribute columns */
+    align-items: flex-start; /* Align columns to the top */
+}
+
+.footer-col {
+    padding: 10px 0; /* Some internal padding */
+}
+
+.footer-col h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333; /* Darker heading color */
+    font-family: var(--font-01);
+}
+
+/* Logo Column */
+.footer-col.footer-logo-col .logo a {
+    font-size: 28px; /* Larger logo in footer */
+    font-weight: bold;
+    text-decoration: none;
+    color: var(--global-color-1); /* Accent color for logo */
+    margin-bottom: 15px;
+    display: block; /* Make it a block for margin */
+}
+
+.footer-col.footer-logo-col .copyright-desktop {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--global-color-dark-gray);
+}
+
+.copyright-mobile {
+    display: none; /* Hidden by default on desktop */
+}
+
+
+/* Contact Column */
+.footer-col.footer-contact-col p {
+    font-size: 0.95em;
+    margin-bottom: 8px;
+}
+
+.footer-col.footer-contact-col i {
+    margin-right: 10px;
+    color: var(--global-color-1); /* Accent color for icons */
+    font-size: 1.1em;
+}
+
+/* Quick Links Column */
+.footer-col.footer-links-col ul {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+.footer-col.footer-links-col ul li {
+    margin-bottom: 8px;
+}
+
+.footer-col.footer-links-col ul li a {
+    color: var(--global-color-dark-gray);
+    text-decoration: none;
+    font-size: 0.95em;
+    transition: color 0.3s ease;
+}
+
+.footer-col.footer-links-col ul li a:hover {
+    color: var(--global-color-1); /* Accent color on hover */
+}
+
+
+/* Social Column */
+.footer-col.footer-social-col .social-icons {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    justify-content: flex-start; /* Align to start in desktop columns */
+}
+
+.footer-col.footer-social-col .social-icon-link {
+    color: var(--global-color-1); /* Accent color for social icons */
+    font-size: 26px; /* Larger social icons */
+    transition: color 0.3s ease, transform 0.2s ease;
+    text-decoration: none; /* Remove underline */
+    display: inline-flex; /* Helps with alignment if text is also present */
+    align-items: center;
+}
+/* If you want text next to social icons, remove the text-indent */
+.footer-col.footer-social-col .social-icon-link i {
+    margin-right: 0; /* Remove icon margin if only icon is there */
+}
+
+.footer-col.footer-social-col .social-icon-link:hover {
+    color: var(--global-color-2); /* Secondary accent on hover */
+    transform: translateY(-2px);
+}
+
+
+
+
+
+/* --- Media Queries --- */
+
+/* Tablet & Smaller Devices (up to 992px) */
+@media (max-width: 992px) {
+    .footer-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Adjust columns for tablets */
+    }
+}
+
+/* Mobile Devices (up to 768px) */
+@media (max-width: 768px) {
+    /* Header & Navbar */
+    header {
+        padding: 10px 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-left: 0;
+    }
+
+    .nav-links a {
+        margin-left: 0; /* Override individual margin */
+    }
+
+    /* Intro Banner */
+    .intro-banner {
+        height: 60vh;
+        min-height: 350px; /* Smaller min-height for mobile */
+    }
+
+    .intro-content h2 {
+        font-size: clamp(2em, 7vw, 3.5em);
+    }
+
+    .intro-content p {
+        font-size: clamp(0.9em, 2.5vw, 1.1em);
+    }
+
+    .hero-button {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+
+    /* Brand Story */
+    .brand-story {
+        padding: 60px 20px; /* Reduce padding on mobile */
+    }
+
+    .brand-story h2 {
+        margin-bottom: 20px;
+    }
+
+    .brand-story h2::after {
+        margin-top: 10px;
+    }
+    
+    /* Section Titles */
+    .section-title h2,
+    .featured h2 {
+        font-size: 28px; /* Slightly smaller for mobile */
+    }
+
+    /* Carousel */
+    .carousel-image {
+        /* FIX: Make width relative to its container to prevent overflow */
+        width: 100%; /* Make it fill the available space */
+        max-width: 300px; /* Set a max width so it doesn't get too big on tablets if carousel-window is wide */
+        height: 200px; /* Adjust height */
+    }
+    
+    .carousel-nav-button {
+        padding: 8px 12px;
+        font-size: 20px;
+    }
+
+    /* Featured Section */
+    .featured {
+        padding: 40px 20px;
+    }
+
+    .category-card img {
+        height: 200px; /* Adjust height for category images */
+    }
+
+    /* Footer */
+    footer {
+        padding: 40px 20px; /* Reduce padding on mobile */
+        text-align: center; /* Center everything on mobile */
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr; /* Stack columns on mobile */
+        gap: 40px; /* More space between stacked columns */
+    }
+
+    .footer-col {
+        padding: 0; /* Remove column internal padding on mobile */
+    }
+
+    .footer-col h3 {
+        margin-bottom: 15px; /* Adjust heading margin */
+    }
+
+    .footer-col.footer-logo-col .logo a {
+        margin-bottom: 5px; /* Adjust logo margin */
+    }
+
+    .footer-col.footer-logo-col .copyright-desktop {
+        display: none; /* Hide desktop copyright */
+    }
+
+    .copyright-mobile {
+        display: block; /* Show mobile copyright */
+        font-size: 0.9em;
+        color: var(--global-color-dark-gray);
+        margin-top: 30px; /* Space above mobile copyright */
+    }
+
+    .footer-col.footer-social-col .social-icons {
+        justify-content: center; /* Center social icons on mobile */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/* --- */
+/* ===== Shop Page Styles (Yara Eyewear Inspired) ===== */
+/* --- */
+
+.shop-main-content {
+    max-width: 1280px; /* Slightly wider overall container */
+    margin: 0px auto 80px auto; /* Top, Right/Left auto (center), Bottom margin */
+    padding: 0 20px; /* Padding for smaller screens and edges */
+}
+
+
+
+
+/* --- Shop Page Banner Styling --- */
+.shop-banner {
+   /* background-image: url('../images/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Optional: adds a parallax effect */
+    height: 70vh; /* Use viewport height for responsiveness, e.g., 70% of viewport height */
+    background-color: var(--global-color-0);
+    margin-top: 0;    /* ADD THIS: Ensures no top margin on the banner */
+    padding-top: 0;
+    min-height: 450px; /* Ensure a minimum height on very small screens */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    
+    position: relative; /* IMPORTANT: Ensures ::before positions correctly relative to this parent */
+    overflow: hidden; /* Important if your background image extends beyond */
+}
+
+.shop-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* NOW COVERS THE WHOLE BANNER */
+    /*background: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for better text contrast */
+    /*z-index: 1;*/
+}
+
+
+.shop-banner .banner-content {
+    max-width: 100%; /* Limit content width for readability */
+    
+    position: relative; /* Crucial: Creates a new stacking context */
+    z-index: 2; 
+    /* Optional: Add a subtle background to the text for contrast if using a busy image */
+    /* background-color: rgba(255, 255, 255, 0.7); */
+    /* border-radius: 8px; */
+}
+
+.shop-banner h1 {
+    font-size: 3.5em; /* Adjust font size as needed */
+    margin-bottom: 10px;
+    color: var(--global-color-1); /* Darker color for heading */
+}
+
+.shop-banner p {
+    font-size: 1.5em; /* Adjust font size as needed */
+    line-height: 1.5;
+    color: var(--global-color-1); /* Slightly lighter color for paragraph */
+}
+
+/* Optional: If you added a button in HTML */
+/*
+.shop-banner .btn {
+    display: inline-block;
+    background-color: #yourPrimaryColor;
+    color: #fff;
+    padding: 10px 25px;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.shop-banner .btn:hover {
+    background-color: #yourDarkerPrimaryColor;
+}
+*/
+
+/* Media query for smaller screens - make banner shorter and text smaller */
+@media (max-width: 768px) {
+    .shop-banner {
+        height: 180px; /* Shorter height on mobile */
+        margin-bottom: 20px;
+    }
+
+    .shop-banner h1 {
+        font-size: 2em;
+    }
+
+    .shop-banner p {
+        font-size: 1em;
+    }
+}
+
+
+
+
+
+
+/* Shop Layout Container (Sidebar + Product Display Area) */
+.shop-layout-container {
+    display: grid; /* Use CSS Grid for robust layout */
+    grid-template-columns: 220px 1fr; /* Fixed sidebar width, rest for products */
+    gap: 40px; /* Space between sidebar and products */
+    align-items: flex-start; /* Align columns to the top */
+}
+
+/* --- Shop Sidebar (Filters) --- */
+.shop-sidebar {
+    width: 220px; /* Explicit width to control fixed sidebar */
+    padding: 25px 0; /* Vertical padding, no horizontal padding as it's part of its fixed width */
+    background-color: var(--global-color-white); /* White background */
+    border-radius: 8px; /* Slight rounding */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    position: sticky; /* Make it sticky */
+    top: 20px; /* Distance from top when scrolled */
+    align-self: start; /* Helps with sticky behavior in grid */
+}
+
+.shop-sidebar h3 {
+    font-size: 1.3em;
+    color: #333;
+    font-family: var(--font-01);
+    font-weight: bold;
+    margin-bottom: 25px;
+    padding: 0 20px; /* Padding inside the sidebar */
+}
+
+.shop-sidebar .filter-group {
+    border-bottom: 1px solid var(--global-color-border); /* Separator lines */
+    padding: 0 0 15px 0; /* Padding around each group */
+    margin-bottom: 15px; /* Space below each group */
+}
+
+.shop-sidebar .filter-group:last-of-type {
+    border-bottom: none; /* No border for the last group */
+}
+
+.shop-sidebar .filter-group summary {
+    font-size: 1.05em;
+    font-weight: bold;
+    color: #555;
+    padding: 10px 20px; /* Padding for summary text */
+    cursor: pointer;
+    outline: none; /* Remove outline on click */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none; /* Prevent text selection on click */
+}
+
+/* Chevron icon for details/summary */
+.shop-sidebar .filter-group summary::after {
+    content: '\f078'; /* Font Awesome chevron-down icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900; /* Solid icon */
+    font-size: 0.8em;
+    transition: transform 0.2s ease;
+}
+
+.shop-sidebar .filter-group details[open] summary::after {
+    transform: rotate(180deg); /* Rotate chevron when open */
+}
+
+.shop-sidebar .filter-group ul {
+    list-style: none;
+    padding: 10px 20px 0 20px; /* Padding for list items */
+    margin: 0;
+}
+
+.shop-sidebar .filter-group ul li {
+    margin-bottom: 8px;
+}
+
+.shop-sidebar .filter-group label {
+    display: flex;
+    align-items: center;
+    font-size: 0.95em;
+    color: var(--global-color-dark-gray);
+    cursor: pointer;
+}
+
+.shop-sidebar .filter-group input[type="checkbox"] {
+    margin-right: 10px;
+    accent-color: var(--global-color-1); /* Accent color for checkboxes */
+}
+
+/* Price Range Inputs */
+.shop-sidebar .price-range-inputs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}
+
+.shop-sidebar .price-range-inputs input[type="number"] {
+    width: 70px;
+    padding: 8px 10px;
+    border: 1px solid var(--global-color-border);
+    border-radius: 4px;
+    font-size: 0.9em;
+    text-align: center;
+ /* -moz-appearance: textfield; /* Hide arrows for Firefox */
+}
+.shop-sidebar .price-range-inputs input[type="number"]::-webkit-outer-spin-button,
+.shop-sidebar .price-range-inputs input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Hide arrows for Chrome/Safari */
+    margin: 0;
+}
+
+.shop-sidebar .price-range-inputs span {
+    font-weight: bold;
+    color: #888;
+}
+
+.shop-sidebar .price-slider {
+    width: calc(100% - 40px); /* Adjust width for padding */
+    margin: 0 20px 15px 20px; /* Center slider with padding */
+    accent-color: var(--global-color-1);
+}
+
+/* Color Options */
+.shop-sidebar .color-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 15px; /* Vertical and horizontal gap */
+    padding: 10px 20px;
+}
+
+.shop-sidebar .color-options label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.shop-sidebar .color-options input[type="checkbox"] {
+    display: none; /* Hide actual checkbox */
+}
+
+.shop-sidebar .color-options .color-box {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid var(--global-color-border);
+    margin-right: 8px;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+}
+
+/* Checkmark for selected color */
+.shop-sidebar .color-options input[type="checkbox"]:checked + .color-box::after {
+    content: '\f00c'; /* Font Awesome check icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    color: var(--global-color-white);
+    font-size: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Specific color backgrounds */
+.shop-sidebar .color-options .color-box.black { background-color: #000; }
+.shop-sidebar .color-options .color-box.brown { background-color: #8B4513; }
+.shop-sidebar .color-options .color-box.gold { background-color: #FFD700; }
+.shop-sidebar .color-options .color-box.silver { background-color: #C0C0C0; }
+/* Add more colors as needed */
+/* For light colors, ensure checkmark is dark */
+.shop-sidebar .color-options input[type="checkbox"]:checked + .color-box.gold::after,
+.shop-sidebar .color-options input[type="checkbox"]:checked + .color-box.silver::after {
+    color: #333;
+}
+
+
+.shop-sidebar .apply-filters-btn {
+    display: block;
+    width: calc(100% - 40px); /* Adjust width for padding */
+    margin: 25px auto 0 auto; /* Center button */
+    padding: 12px 15px;
+    background-color: var(--global-color-1);
+    color: var(--global-color-white);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.shop-sidebar .apply-filters-btn:hover {
+    background-color: var(--global-color-2);
+}
+
+/* --- Product Display Area --- */
+.product-display-area {
+    flex-grow: 1; /* Take up remaining space */
+}
+
+/* Top Bar (Results Count & Sort Options) */
+.products-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--global-color-border);
+    font-size: 0.95em;
+    color: #555;
+}
+
+.products-top-bar .sort-options label {
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.products-top-bar select {
+    padding: 8px 10px;
+    border: 1px solid var(--global-color-border);
+    border-radius: 4px;
+    background-color: var(--global-color-white);
+    font-size: 0.9em;
+    cursor: pointer;
+    appearance: none; /* Remove default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23666"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    background-size: 12px;
+}
+
+/* --- Product Grid --- */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Tighter grid */
+    gap: 25px; /* Space between cards */
+}
+
+/* --- Product Card --- */
+.product-card {
+    background-color: var(--global-color-white);
+    border-radius: 8px; /* Slight rounding */
+    overflow: hidden; /* Hide overflowing content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    text-align: center;
+    position: relative; /* For image wrapper positioning */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding-bottom: 15px; /* Padding for info section */
+}
+
+.product-card:hover {
+    transform: translateY(-3px); /* Subtle lift on hover */
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.product-card .product-image-wrapper {
+    position: relative; /* For actions overlay */
+    width: 100%;
+    height: 220px; /* Keep this fixed height for consistent card appearance */
+    overflow: hidden;
+    margin-bottom: 10px;
+
+    /* These are already perfect for centering, no change needed here */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card .product-image-wrapper img {
+    /* --- MODIFIED: Ensure image fills space while maintaining aspect ratio, and is centered --- */
+    width: 100%;    /* Allow image to take full width of container */
+    height: 100%;   /* Allow image to take full height of container */
+    object-fit: contain; /* CRUCIAL: it will scale the image down to fit and preserve aspect ratio */
+    /* --- END MODIFIED --- */
+
+    display: block; /* Keep this to remove extra space below image */
+    transition: transform 0.3s ease; /* Keep this for hover effects */
+}
+
+.product-card:hover .product-image-wrapper img {
+    transform: scale(1.05); /* Zoom in effect on hover */
+}
+
+.product-card .product-actions {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent background */
+    padding: 10px 0;
+    transform: translateY(100%); /* Start off-screen */
+    transition: transform 0.3s ease;
+    opacity: 0; /* Hidden initially */
+    pointer-events: none; /* Disable interaction when hidden */
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.product-card:hover .product-actions {
+    transform: translateY(0); /* Slide up on hover */
+    opacity: 1; /* Become visible */
+    pointer-events: auto; /* Enable interaction */
+}
+
+.product-card .action-btn {
+    background-color: var(--global-color-1);
+    color: var(--global-color-white);
+    border: none;
+    border-radius: 50%; /* Circular buttons */
+    width: 40px;
+    height: 40px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none; /* For link */
+    padding: 0;
+    margin: 0;
+}
+
+.product-card .action-btn:hover {
+    background-color: var(--global-color-2);
+}
+
+.product-card .product-info {
+    padding: 0 10px; /* Padding for text inside card */
+}
+
+.product-card h3 {
+    font-size: 1.05em;
+    color: #333;
+    margin-bottom: 5px;
+    font-family: var(--font-01);
+    font-weight: 500;
+}
+
+.product-card .product-price {
+    font-size: 1.0em;
+    font-weight: bold;
+    color: var(--global-color-1);
+}
+
+/* --- Pagination --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    gap: 10px;
+}
+
+.pagination .page-link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--global-color-border);
+    border-radius: 5px;
+    text-decoration: none;
+    color: var(--global-color-dark-gray);
+    font-size: 1em;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.pagination .page-link.active,
+.pagination .page-link:hover {
+    background-color: var(--global-color-1);
+    color: var(--global-color-white);
+    border-color: var(--global-color-1);
+}
+
+.pagination .page-link i {
+    font-size: 0.9em;
+}
+
+/* --- Media Queries --- */
+
+/* Tablet & Smaller Devices (up to 992px) */
+@media (max-width: 992px) {
+    /* Footer responsiveness (from previous section) */
+    .footer-container {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    /* Shop Layout Specific */
+    .shop-layout-container {
+        grid-template-columns: 1fr; /* Stack sidebar and product area */
+        gap: 50px;
+    }
+
+    .shop-sidebar {
+        width: 100%; /* Take full width on stacked layout */
+        position: static; /* Remove sticky behavior when stacked */
+        box-shadow: none; /* Optional: remove shadow when not sticky */
+        padding: 0 20px; /* Adjust padding for full width */
+        border-radius: 0;
+    }
+    
+    .shop-sidebar h3 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .shop-sidebar .filter-group {
+        border-bottom: 1px solid var(--global-color-border);
+        padding: 0 0 15px 0;
+        margin-bottom: 15px;
+        background-color: var(--global-color-white); /* Add background for each collapsible group */
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.03); /* Subtle shadow for each group */
+        overflow: hidden; /* Hide content when closed */
+    }
+    
+    .shop-sidebar .filter-group summary {
+        padding: 15px 20px; /* Larger hit area for summary */
+    }
+
+    .shop-sidebar .filter-group details[open] {
+        padding-bottom: 15px; /* Consistent bottom padding when open */
+    }
+
+    .shop-sidebar .price-range-inputs,
+    .shop-sidebar .price-slider,
+    .shop-sidebar .color-options,
+    .shop-sidebar .apply-filters-btn {
+        margin-left: auto;
+        margin-right: auto; /* Center these elements */
+    }
+
+    .shop-sidebar .apply-filters-btn {
+        width: 80%; /* Wider button */
+        max-width: 300px;
+    }
+
+    .products-top-bar {
+        flex-direction: column; /* Stack results and sort options */
+        align-items: flex-start;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .products-top-bar .sort-options {
+        width: 100%; /* Sort dropdown takes full width */
+        display: flex; /* Align label and select */
+        align-items: center;
+        justify-content: space-between;
+    }
+    .products-top-bar select {
+        flex-grow: 1; /* Allow select to grow */
+        max-width: 200px; /* Limit max width */
+    }
+
+    .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); /* Smaller cards on tablets */
+        gap: 15px;
+    }
+
+    .product-card .product-image-wrapper {
+        height: 180px; /* Shorter image height on tablets */
+    }
+}
+
+/* Mobile Devices (up to 768px) */
+@media (max-width: 768px) {
+    /* Header & Navbar (from previous section) */
+    header {
+        padding: 10px 20px;
+    }
+
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        margin-left: 0;
+    }
+
+    .nav-links a {
+        margin-left: 0;
+    }
+
+    /* Intro Banner (from previous section) */
+    .intro-banner {
+        height: 60vh;
+        min-height: 350px;
+    }
+
+    .intro-content h2 {
+        font-size: clamp(2em, 7vw, 3.5em);
+    }
+
+    .intro-content p {
+        font-size: clamp(0.9em, 2.5vw, 1.1em);
+    }
+
+    .hero-button {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+
+    /* Brand Story (from previous section) */
+    .brand-story {
+        padding: 60px 20px;
+    }
+
+    .brand-story h2 {
+        margin-bottom: 20px;
+    }
+
+    .brand-story h2::after {
+        margin-top: 10px;
+    }
+    
+    /* Section Titles (from previous section) */
+    .section-title h2,
+    .featured h2 {
+        font-size: 28px;
+    }
+
+    /* Carousel (from previous section) */
+    .carousel-image {
+        width: 100%;
+        max-width: 300px;
+        height: 200px;
+    }
+    
+    .carousel-nav-button {
+        padding: 8px 12px;
+        font-size: 20px;
+    }
+
+    /* Featured Section (from previous section) */
+    .featured {
+        padding: 40px 20px;
+    }
+
+    .category-card img {
+        height: 200px;
+    }
+
+    /* Shop Page Specific - Mobile Icons (NEW) */
+    .product-card .product-actions {
+        transform: translateY(0); /* Make always visible on mobile */
+        opacity: 1; /* Make always visible on mobile */
+        pointer-events: auto; /* Make always interactive on mobile */
+        /* Optionally, you might want a slightly lighter background on mobile if it feels too heavy */
+        /* background-color: rgba(255, 255, 255, 0.95); */
+    }
+
+    /* Footer (from previous section) */
+    footer {
+        padding: 40px 20px;
+        text-align: center;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .footer-col {
+        padding: 0;
+    }
+
+    .footer-col h3 {
+        margin-bottom: 15px;
+    }
+
+    .footer-col.footer-logo-col .logo a {
+        margin-bottom: 5px;
+    }
+
+    .footer-col.footer-logo-col .copyright-desktop {
+        display: none;
+    }
+
+    .copyright-mobile {
+        display: block;
+        font-size: 0.9em;
+        color: var(--global-color-dark-gray);
+        margin-top: 30px;
+    }
+
+    .footer-col.footer-social-col .social-icons {
+        justify-content: center;
+    }
+}
+
+/* Small Mobile Devices (up to 576px) */
+@media (max-width: 576px) {
+    /* General content padding for very small screens */
+    .shop-main-content {
+        padding: 0 15px;
+    }
+
+    .shop-layout-container {
+        gap: 40px;
+    }
+
+    .shop-sidebar {
+        padding: 0 15px;
+    }
+
+    .shop-sidebar h3 {
+        font-size: 1.2em;
+    }
+
+    .shop-sidebar .filter-group summary {
+        font-size: 1em;
+        padding: 12px 15px;
+    }
+
+    .shop-sidebar .filter-group ul,
+    .shop-sidebar .price-range-inputs,
+    .shop-sidebar .price-slider,
+    .shop-sidebar .color-options {
+        padding: 10px 15px 0 15px;
+    }
+
+    .products-top-bar {
+        padding: 10px 0;
+        margin-bottom: 25px;
+    }
+
+    .product-grid {
+        grid-template-columns: 1fr; /* Single column for product cards on mobile */
+        gap: 20px;
+    }
+
+    .product-card .product-image-wrapper {
+        height: 200px; /* Slightly taller for single column display */
+    }
+
+    .product-card .product-actions {
+        padding: 8px 0;
+    }
+
+    .product-card .action-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+}
+
+
+
+
+
+
+
+/* --- Product Detail Page Styles --- */
+
+/* Main container for the product detail page */
+.product-detail-main {
+    padding: 60px 20px; /* Top/bottom padding, some side padding */
+    max-width: 1200px; /* Limit overall width of the content */
+    margin: 0 auto; /* Center the main content */
+    box-sizing: border-box; /* Include padding in element's total width */
+}
+
+/* Container for the image gallery and product info, to create two columns */
+.product-detail-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows columns to wrap on smaller screens */
+    gap: 40px; /* Space between the two columns */
+    justify-content: center; /* Center content if there's extra space */
+    align-items: flex-start; /* Align items to the top */
+}
+
+/* Product Image Gallery Styles */
+.product-image-gallery {
+    flex: 1; /* Allow it to grow */
+    min-width: 300px; /* Minimum width before wrapping */
+    max-width: 500px; /* Max width for the image section */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* CHANGED: Consistent border color for visibility */
+    border: 1px solid var(--global-color-border);
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.main-product-image {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.main-product-image img {
+    width: 100%;
+    height: auto;
+    display: block; /* Removes extra space below image */
+    border-radius: 5px; /* Slightly rounded corners */
+}
+
+.thumbnail-images {
+    display: flex;
+    gap: 10px; /* Space between thumbnails */
+    justify-content: center; /* Center thumbnails */
+    flex-wrap: wrap; /* Allow thumbnails to wrap */
+}
+
+.thumbnail-images img {
+    width: 80px; /* Size of thumbnails */
+    height: 80px;
+    object-fit: cover; /* Ensures images fill the space without distortion */
+    cursor: pointer;
+    /* CHANGED: Consistent border color */
+    border: 1px solid var(--global-color-border);
+    border-radius: 3px;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.thumbnail-images img.active,
+.thumbnail-images img:hover {
+    /* CHANGED: Use global accent color */
+    border-color: var(--global-color-1);
+}
+
+/* Product Information Section Styles */
+.product-info-section {
+    flex: 1; /* Allow it to grow */
+    min-width: 300px; /* Minimum width before wrapping */
+    max-width: 600px; /* Max width for the info section */
+    box-sizing: border-box;
+    padding: 0 10px; /* Some horizontal padding */
+}
+
+.product-info-section .product-name {
+    font-size: 2.5em; /* Larger heading */
+    margin-bottom: 10px;
+    color:black; /* Consider using a global variable for heading color if defined, e.g., var(--global-color-heading) */
+}
+
+.product-info-section .product-price {
+    font-size: 1.8em; /* Prominent price */
+    font-weight: bold;
+    color: var(--global-color-1); /* Accent color for price */
+    margin-bottom: 15px;
+}
+
+.product-info-section .product-rating {
+    margin-bottom: 15px;
+    color: var(--global-color-1); /* Star color */
+}
+
+.product-info-section .product-rating .stars .fas {
+    margin-right: 2px; /* Space between stars */
+}
+
+.product-info-section .product-rating .review-count {
+    font-size: 0.9em;
+    color: #666; /* Consider using a global variable for text color, e.g., var(--global-color-text) */
+    margin-left: 10px;
+}
+
+.product-info-section .product-description {
+    font-size: 1em;
+    line-height: 1.6;
+    /* CHANGED: Use dark gray for better readability of body text */
+    color: var(--global-color-dark-gray);
+    margin-bottom: 25px;
+}
+
+/* Product Options (Color, Material, Quantity) */
+.product-options .option-group {
+    margin-bottom: 20px;
+}
+
+.product-options .option-group label {
+    display: block; /* Label on its own line */
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333; /* Consider using a global variable for text/heading color */
+}
+
+/* Color Selector Swatches */
+.color-selector {
+    display: flex;
+    gap: 10px;
+}
+
+.color-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Circular swatches */
+    /* CHANGED: Consistent border color */
+    border: 2px solid var(--global-color-border);
+    cursor: pointer;
+    transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    position: relative; /* For checkmark positioning */
+    overflow: hidden; /* Ensure checkmark stays within bounds if it's too big */
+}
+
+.color-swatch:hover {
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+.color-swatch.active {
+    /* CHANGED: Use global accent color for border, neutral shadow for consistency */
+    border-color: var(--global-color-1);
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1); /* Subtle, consistent shadow */
+}
+
+/* NEW: Checkmark for selected color swatch */
+.color-swatch.active::after {
+    content: '\f00c'; /* Font Awesome check icon */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900; /* Solid icon */
+    color: var(--global-color-white); /* Default white checkmark */
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1; /* Ensure checkmark is above color */
+}
+
+/* IMPORTANT: If you have very light color swatches where a white checkmark is hard to see,
+   you might need to add specific rules like this (example for a 'gold' color swatch):
+   .color-swatch.active.gold::after {
+       color: #333; /* Or black for dark checkmark */
+   
+   /*You can add these as needed based on your specific color swatches.
+*/
+
+.product-options input[type="number"] {
+    width: 60px;
+    padding: 8px;
+    /* CHANGED: Consistent border color */
+    border: 1px solid var(--global-color-border);
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1em;
+}
+
+/* Add to Cart Button */
+.add-to-cart-btn {
+    background-color: #28a745; /* Green color for Add to Cart (adjust) */
+    color: white;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+    display: block; /* Make it a block element to take full width */
+    width: 100%; /* Or max-width: 300px; for a smaller button */
+    max-width: 300px; /* Example max width */
+    margin-bottom: 15px;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.stock-status {
+    font-size: 1em;
+    font-weight: bold;
+    color: #28a745; /* Green for In Stock */
+    margin-top: 5px;
+}
+
+
+/* --- Consolidated Media Queries (add these rules to your main media query section) --- */
+
+/* Example of where these rules would be placed in your consolidated media queries: */
+
+/* Mobile Devices (up to 768px) */
+@media (max-width: 768px) {
+    /* ... existing global and shop media queries for 768px ... */
+
+    /* Product Detail Page Specific */
+    .product-detail-main {
+        padding: 30px 15px;
+    }
+
+    .product-detail-container {
+        flex-direction: column; /* Stack columns vertically on small screens */
+        gap: 30px;
+    }
+
+    .product-image-gallery,
+    .product-info-section {
+        max-width: 100%; /* Take full width */
+        min-width: unset; /* Remove min-width constraint */
+    }
+
+    .product-info-section .product-name {
+        font-size: 2em;
+    }
+
+    .product-info-section .product-price {
+        font-size: 1.5em;
+    }
+
+    .add-to-cart-btn {
+        max-width: 100%; /* Button takes full width */
+    }
+}
+
+/* Small Mobile Devices (up to 576px) */
+@media (max-width: 576px) {
+    /* ... existing global and shop media queries for 576px ... */
+
+    /* Product Detail Page Specific */
+    .product-detail-main {
+        padding: 20px 10px; /* Adjust padding for very small screens */
+    }
+
+    .thumbnail-images img {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/*cart style ////////////////////
+///////////////////////////////////
+///////////////////////////////////////////////////*/
+
+/* --- Shopping Cart Page Styles --- */
+
+.cart-page-container {
+    padding: 60px 0; /* Vertical padding for the entire cart page */
+    background-color: var(--global-color-0); /* A light background for the page */
+}
+
+.cart-content-wrapper {
+    max-width: 1200px; /* Max width for the content, similar to your other pages */
+    margin: 0 auto; /* Center the content wrapper */
+    display: grid; /* Use CSS Grid for the two-column layout */
+    grid-template-columns: 2fr 1fr; /* Cart items take 2/3, totals take 1/3 */
+    gap: 40px; /* Space between the two columns */
+    align-items: start; /* Align content to the top of each column */
+}
+
+/* Base styling for sections */
+.cart-items-section,
+.cart-totals-section {
+    background-color: var(--global-color-white); /* White background for the content boxes */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 30px; /* Internal padding for the sections */
+}
+
+.cart-items-section h2,
+.cart-totals-section h3 {
+    font-family: var(--font-01); /* Your primary font */
+    font-size: 1.8em; /* Larger heading */
+    color: var(--global-color-dark-gray); /* Dark grey text */
+    margin-bottom: 25px; /* Space below heading */
+    text-align: left; /* Align headings to the left */
+}
+
+
+
+
+
+
+
+
+
+/* Cart Table Styling */
+.cart-table-container {
+    overflow-x: auto; /* Ensures table is scrollable on small screens if it overflows */
+    margin-bottom: 20px;
+}
+
+.cart-table-container table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between table cells */
+    text-align: left;
+}
+
+.cart-table-container thead th {
+    font-family: var(--font-01);
+    font-weight: 600;
+    font-size: 0.95em;
+    color: #555;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--global-color-border); /* Separator below headers */
+    white-space: nowrap; /* Keep headers on one line */
+}
+
+.cart-table-container tbody td {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--global-color-border); /* Separator below rows */
+    vertical-align: middle; /* Vertically align content in the middle */
+}
+
+.cart-table-container tbody tr:last-child td {
+    border-bottom: none; /* No border for the last row */
+}
+
+/* Specific Column Widths (adjust as needed) */
+.cart-table-container th.product-remove,
+.cart-table-container td.product-remove {
+    width: 50px;
+    text-align: center;
+}
+.cart-table-container th.product-thumbnail,
+.cart-table-container td.product-thumbnail {
+    width: 80px;
+}
+.cart-table-container th.product-price,
+.cart-table-container td.product-price,
+.cart-table-container th.product-quantity,
+.cart-table-container td.product-quantity,
+.cart-table-container th.product-subtotal,
+.cart-table-container td.product-subtotal {
+    width: 120px; /* Adjust for price/quantity/subtotal columns */
+    white-space: nowrap;
+}
+
+/* Product Thumbnail */
+.cart-product-img {
+    width: 60px; /* Smaller image size in cart */
+    height: auto;
+    border-radius: 4px;
+    vertical-align: middle;
+}
+
+/* Product Name */
+.cart-table-container td.product-name a {
+    font-family: var(--font-01);
+    font-weight: 500;
+    color: var(--global-color-dark-gray);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.cart-table-container td.product-name a:hover {
+    color: var(--global-color-1); /* Hover color for product name */
+}
+
+/* Product Price & Subtotal */
+.cart-table-container td.product-price,
+.cart-table-container td.product-subtotal {
+    font-family: var(--font-01);
+    font-weight: 600;
+    color: var(--global-color-1); /* Price color */
+    font-size: 1.05em;
+}
+
+/* Remove Item Button */
+.remove-item-btn {
+    background: none;
+    border: none;
+    color: #bbb; /* Light grey color */
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.remove-item-btn:hover {
+    color: #ff0000; /* Red on hover */
+}
+
+/* Quantity Input Styling */
+.quantity-input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid var(--global-color-border);
+    border-radius: 4px;
+    width: fit-content; /* Adjust width to content */
+    overflow: hidden; /* Hide overflow from buttons/input */
+}
+
+.quantity-input-wrapper button {
+    background-color: #f8f8f8;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #555;
+    transition: background-color 0.2s ease;
+}
+
+.quantity-input-wrapper button:hover {
+    background-color: #eee;
+}
+
+.quantity-input {
+    width: 40px; /* Fixed width for input */
+    border: none;
+    text-align: center;
+    -moz-appearance: textfield; /* Hide arrows for Firefox */
+    font-size: 1em;
+    color: var(--global-color-dark-gray);
+    padding: 8px 0; /* Vertical padding to match buttons */
+}
+
+.quantity-input::-webkit-outer-spin-button,
+.quantity-input::-webkit-inner-spin-button {
+    -webkit-appearance: none; /* Hide arrows for Chrome/Safari */
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+/* Cart Actions Bottom Buttons */
+.cart-actions-bottom {
+    display: flex;
+    justify-content: space-between; /* Pushes buttons to opposite ends */
+    align-items: center;
+    padding-top: 20px;
+    border-top: 1px solid var(--global-color-border); /* Separator line above buttons */
+    margin-top: 20px;
+}
+
+.cart-actions-bottom .continue-shopping-btn,
+.cart-actions-bottom .update-cart-btn {
+    padding: 12px 20px;
+    border: 1px solid var(--global-color-border);
+    border-radius: 5px;
+    font-size: 0.95em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none; /* For the 'Continue Shopping' link */
+    text-align: center;
+    white-space: nowrap; /* Prevent button text from wrapping */
+}
+
+.cart-actions-bottom .continue-shopping-btn {
+    background-color: var(--global-color-white);
+    color: var(--global-color-dark-gray);
+}
+
+.cart-actions-bottom .continue-shopping-btn:hover {
+    background-color: #f0f0f0;
+    border-color: #ccc;
+}
+
+.cart-actions-bottom .update-cart-btn {
+    background-color: var(--global-color-1); /* Your primary brand color */
+    color: var(--global-color-white);
+    border-color: var(--global-color-1); /* Match border color */
+}
+
+.cart-actions-bottom .update-cart-btn:hover {
+    background-color: var(--global-color-2); /* A slightly darker shade for hover */
+    border-color: var(--global-color-2);
+}
+
+
+
+
+
+
+
+
+
+/* Cart Totals Section Styling */
+.cart-totals-section h3 {
+    text-align: left; /* Ensure heading is left-aligned in this section too */
+}
+
+.cart-totals-summary {
+    border: 1px solid var(--global-color-border); /* Border around the summary box */
+    border-radius: 8px;
+    margin-bottom: 30px;
+    overflow: hidden; /* Ensures border-radius applies nicely */
+}
+
+.cart-totals-summary .total-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 20px; /* Internal padding for each row */
+    font-family: var(--font-01);
+    color: var(--global-color-dark-gray);
+    font-size: 1.05em;
+    border-bottom: 1px solid var(--global-color-border); /* Separator between rows */
+}
+
+.cart-totals-summary .total-row:last-child {
+    border-bottom: none; /* No border for the last row */
+}
+
+.cart-totals-summary .total-row span:first-child {
+    font-weight: 500; /* Key label (Subtotal, Shipping) */
+}
+
+.cart-totals-summary .total-row span:last-child {
+    font-weight: 600; /* Value (prices) */
+    color: #333; /* Slightly darker for values */
+}
+
+.cart-totals-summary .order-total {
+    background-color: #f8f8f8; /* Light background for the total row */
+    font-size: 1.2em; /* Larger font for final total */
+    font-weight: 700;
+    color: var(--global-color-1); /* Highlight total color */
+}
+
+.cart-totals-summary .order-total strong {
+    color: var(--global-color-1); /* Ensure strong tag also has brand color */
+}
+
+/* Proceed to Checkout Button */
+.proceed-to-checkout-btn {
+    display: block; /* Make it take full width */
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--global-color-1); /* Your primary brand color */
+    color: var(--global-color-white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-decoration: none;
+    text-transform: uppercase; /* Uppercase text */
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.proceed-to-checkout-btn:hover {
+    background-color: var(--global-color-2); /* A darker shade for hover */
+}
+
+
+
+.error-message {
+    color: red;
+    font-size: 0.85em;
+    margin-top: 5px;
+    display: none; /* Hidden by default */
+}
+
+/* Style for invalid input fields */
+input:invalid:not(:focus):not(:placeholder-shown) {
+    border-color: red;
+}
+
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) {
+    .cart-content-wrapper {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 30px; /* Reduce gap when stacked */
+        padding: 0 20px; /* Add horizontal padding to wrapper */
+    }
+
+    .cart-items-section,
+    .cart-totals-section {
+        padding: 20px; /* Adjust padding for smaller screens */
+    }
+
+    .cart-items-section h2,
+    .cart-totals-section h3 {
+        font-size: 1.5em; /* Slightly smaller headings */
+        margin-bottom: 20px;
+    }
+
+    .cart-table-container thead th {
+        font-size: 0.85em; /* Smaller font for table headers */
+        padding: 12px 0;
+    }
+
+    .cart-table-container tbody td {
+        font-size: 0.9em; /* Smaller font for table content */
+        padding: 15px 0;
+    }
+
+    .cart-table-container th.product-thumbnail,
+    .cart-table-container td.product-thumbnail {
+        width: 60px; /* Adjust thumbnail column width */
+    }
+    .cart-product-img {
+        width: 50px; /* Adjust image width */
+    }
+
+    /* Allow critical table columns to adapt */
+    .cart-table-container th.product-name,
+    .cart-table-container td.product-name,
+    .cart-table-container th.product-price,
+    .cart-table-container td.product-price,
+    .cart-table-container th.product-quantity,
+    .cart-table-container td.product-quantity {
+        width: auto; /* Override fixed widths, allow to shrink/grow */
+    }
+
+    .quantity-input-wrapper {
+        width: fit-content; /* Ensure it doesn't take too much space */
+    }
+
+    .cart-actions-bottom {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 15px; /* Space between stacked buttons */
+    }
+
+    .cart-actions-bottom .continue-shopping-btn,
+    .cart-actions-bottom .update-cart-btn {
+        width: 100%; /* Make buttons full width when stacked */
+        padding: 10px 15px;
+    }
+
+    .proceed-to-checkout-btn {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .cart-content-wrapper {
+        padding: 0 15px; /* Slightly more aggressive horizontal padding */
+    }
+
+    .cart-items-section h2,
+    .cart-totals-section h3 {
+        font-size: 1.3em;
+    }
+
+    /* Hide less important columns for better readability on very small screens */
+    .cart-table-container th.product-remove,
+    .cart-table-container td.product-remove,
+    .cart-table-container th.product-subtotal,
+    .cart-table-container td.product-subtotal {
+        display: none;
+    }
+
+    /* Adjust font sizes even more for readability */
+    .cart-table-container thead th {
+        font-size: 0.75em;
+    }
+    .cart-table-container tbody td {
+        font-size: 0.8em;
+        padding: 12px 0; /* Reduced vertical padding */
+    }
+
+    .cart-product-img {
+        width: 40px; /* Even smaller images */
+    }
+
+    .cart-table-container th.product-thumbnail,
+    .cart-table-container td.product-thumbnail {
+        width: 50px; /* Slightly smaller thumbnail column */
+    }
+
+    /* Ensure remaining columns like product name can take available space */
+    .cart-table-container td.product-name {
+        min-width: 100px; /* Ensure product name column doesn't become too small */
+        /* flex-grow: 1; if using flexbox within td for alignment */
+    }
+
+    /* Set a minimum width for the entire table to ensure horizontal scrolling is enabled when content overflows */
+    .cart-table-container table {
+        min-width: 320px; /* Prevents table from crushing, forces scroll if needed */
+    }
+
+    /* Quantity input adjustments */
+    .quantity-input-wrapper {
+        min-width: 80px; /* Ensure buttons and input fit */
+    }
+    .quantity-input-wrapper button {
+        padding: 6px 10px; /* Slightly smaller buttons */
+    }
+    .quantity-input {
+        width: 30px; /* Smaller input width */
+        padding: 6px 0;
+        font-size: 0.9em;
+    }
+}
+
+/* Optional: Even smaller breakpoint for very tiny phones (e.g., iPhone SE first gen) */
+@media (max-width: 400px) {
+    .cart-content-wrapper {
+        padding: 0 10px; /* Even tighter horizontal padding */
+    }
+    .cart-items-section,
+    .cart-totals-section {
+        padding: 15px; /* Reduced internal padding */
+    }
+    .cart-table-container thead th {
+        font-size: 0.7em;
+    }
+    .cart-table-container tbody td {
+        font-size: 0.75em;
+        padding: 10px 0;
+    }
+    .cart-product-img {
+        width: 35px;
+    }
+    .cart-table-container th.product-thumbnail,
+    .cart-table-container td.product-thumbnail {
+        width: 45px;
+    }
+    .quantity-input-wrapper {
+        min-width: 70px;
+    }
+    .quantity-input-wrapper button {
+        padding: 4px 8px;
+    }
+    .quantity-input {
+        width: 25px;
+        font-size: 0.9em;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Checkout Page Styles --- */
+
+.checkout-page-container {
+    padding: 60px 0; /* Vertical padding for the entire checkout page */
+    background-color: var(--global-color-0); /* A light background for the page */
+}
+
+.checkout-content-wrapper {
+    max-width: 1200px; /* Max width for the content, consistent with other pages */
+    margin: 0 auto; /* Center the content wrapper */
+    display: grid; /* Use CSS Grid for the two-column layout */
+    grid-template-columns: 2fr 1fr; /* Billing details (left) take 2/3, order summary (right) takes 1/3 */
+    gap: 40px; /* Space between the two columns */
+    align-items: start; /* Align content to the top of each column */
+}
+
+/* Base styling for sections */
+.checkout-billing-details,
+.checkout-order-summary {
+    background-color: var(--global-color-white); /* White background for the content boxes */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 30px; /* Internal padding for the sections */
+}
+
+.checkout-billing-details h2,
+.checkout-order-summary h2 {
+    font-family: var(--font-01); /* Your primary font */
+    font-size: 1.8em; /* Larger heading */
+    color: var(--global-color-dark-gray); /* Dark grey text */
+    margin-bottom: 25px; /* Space below heading */
+    text-align: left; /* Align headings to the left */
+}
+
+
+
+
+
+
+
+
+
+/* Billing Form Styling */
+.billing-form .form-group {
+    margin-bottom: 20px; /* Space between form groups */
+}
+
+.billing-form .form-group label {
+    display: block; /* Make label take its own line */
+    font-family: var(--font-01);
+    font-weight: 600;
+    color: var(--global-color-dark-gray);
+    margin-bottom: 8px; /* Space between label and input */
+    font-size: 0.95em;
+}
+
+.billing-form .form-group .required {
+    color: red; /* Style for the required asterisk */
+    margin-left: 4px;
+}
+
+.billing-form input[type="text"],
+.billing-form input[type="email"],
+.billing-form input[type="tel"],
+.billing-form textarea {
+    width: 100%; /* Full width of its parent container */
+    padding: 12px 15px;
+    border: 1px solid var(--global-color-border);
+    border-radius: 5px;
+    font-family: var(--font-01);
+    font-size: 1em;
+    color: #555;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.billing-form input:focus,
+.billing-form textarea:focus {
+    border-color: var(--global-color-1); /* Highlight border on focus */
+    box-shadow: 0 0 0 2px rgba(var(--global-color-1-rgb), 0.2); /* Light shadow on focus */
+    outline: none; /* Remove default outline */
+}
+
+.billing-form input::placeholder,
+.billing-form textarea::placeholder {
+    color: #aaa;
+}
+
+.billing-form textarea {
+    resize: vertical; /* Allow vertical resizing only */
+    min-height: 80px;
+}
+
+/* Form Row for Half-Width Fields */
+.billing-form .form-row {
+    display: flex;
+    gap: 20px; /* Space between fields in a row */
+    margin-bottom: 20px;
+}
+
+.billing-form .form-row .form-group.half-width {
+    flex: 1; /* Each takes equal space */
+    margin-bottom: 0; /* Remove bottom margin here, handled by form-row */
+}
+
+/* Second input for street address (optional line) */
+.billing-form #street-address + input {
+    margin-top: 15px; /* Space between main street address and optional line */
+}
+
+
+
+
+
+
+
+
+
+/* Order Summary Table Styling */
+.checkout-order-summary .order-review-table {
+    margin-bottom: 30px;
+    border: 1px solid var(--global-color-border); /* Outer border for the summary table */
+    border-radius: 8px;
+    overflow: hidden; /* Ensures border-radius applies to contents */
+}
+
+.checkout-order-summary .order-review-table table {
+    width: 100%;
+    border-collapse: collapse; /* Remove space between cells */
+    font-family: var(--font-01);
+}
+
+.checkout-order-summary .order-review-table th,
+.checkout-order-summary .order-review-table td {
+    padding: 15px 20px; /* Internal padding for table cells */
+    text-align: left;
+    border-bottom: 1px solid var(--global-color-border); /* Separator between rows */
+}
+
+.checkout-order-summary .order-review-table thead th {
+    font-weight: 600;
+    color: #555;
+    background-color: #f8f8f8; /* Light background for header */
+}
+
+.checkout-order-summary .order-review-table tbody td {
+    color: var(--global-color-dark-gray);
+}
+
+.checkout-order-summary .order-review-table tbody .order-item td:first-child {
+    font-weight: 500; /* Product name bold */
+}
+
+.checkout-order-summary .order-review-table tbody .order-item td:last-child {
+    font-weight: 600; /* Subtotal value bold */
+    color: var(--global-color-1); /* Price color */
+}
+
+.checkout-order-summary .order-review-table tfoot th,
+.checkout-order-summary .order-review-table tfoot td {
+    font-size: 1.05em;
+}
+
+.checkout-order-summary .order-review-table tfoot tr:last-child th,
+.checkout-order-summary .order-review-table tfoot tr:last-child td {
+    border-bottom: none; /* No border for the very last row */
+}
+
+.checkout-order-summary .order-review-table .order-total th,
+.checkout-order-summary .order-review-table .order-total td {
+    background-color: #f0f0f0; /* Light background for the final total row */
+    font-weight: 700;
+    font-size: 1.2em; /* Larger font for final total */
+    color: var(--global-color-1); /* Highlight total color */
+}
+
+
+
+
+
+
+
+
+
+/* Payment Methods Styling */
+.payment-methods {
+    margin-bottom: 30px;
+    border: 1px solid var(--global-color-border); /* Border around payment options */
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fcfcfc; /* Slightly different background */
+}
+
+.payment-option {
+    margin-bottom: 15px; /* Space between payment options */
+}
+
+.payment-option:last-child {
+    margin-bottom: 0;
+}
+
+.payment-option input[type="radio"] {
+    margin-right: 10px; /* Space between radio button and label */
+    /* You might need custom styling for radios if you want a different look,
+       but this is a good start for default browser radios. */
+}
+
+.payment-option label {
+    font-family: var(--font-01);
+    font-weight: 600;
+    color: var(--global-color-dark-gray);
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
+.payment-description {
+    font-size: 0.9em;
+    color: #777;
+    margin-top: 5px;
+    padding-left: 25px; /* Indent description to align with label text */
+    line-height: 1.5;
+}
+
+/* Hide description by default, show when radio is checked */
+.payment-option .payment-description {
+    display: none;
+}
+
+.payment-option input[type="radio"]:checked ~ .payment-description {
+    display: block;
+}
+
+
+
+
+
+
+
+
+
+/* Place Order Button */
+.place-order-btn {
+    display: block; /* Make it take full width */
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--global-color-1); /* Your primary brand color */
+    color: var(--global-color-white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase; /* Uppercase text */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.place-order-btn:hover {
+    background-color: var(--global-color-2); /* A darker shade for hover */
+    box-shadow: 0 4px 15px rgba(var(--global-color-1-rgb), 0.3); /* Slight lift effect */
+}
+
+
+
+
+
+
+
+
+
+:root {
+    /* Existing variables... */
+    --global-color-light-gray: #f5f5f5; /* For page backgrounds */
+    --global-color-dark-gray: #333333; /* For dark text */
+    --global-color-border: #e0e0e0; /* For subtle borders */
+    --global-color-white: #ffffff; /* For backgrounds */
+
+    /* Make sure you have your main brand colors */
+    --global-color-1: #8C9A8C; /* Example primary color */
+    --global-color-1-rgb: 140, 154, 140; /* RGB for primary color, useful for shadows/transparency */
+    --global-color-2: #6C7A6C; /* Example darker primary color for hover */
+
+    --font-01: 'Arial', sans-serif; /* Example font-family */
+}
+
+
+
+
+
+
+
+
+
+/* --- Responsive Adjustments for Checkout Page --- */
+
+@media (max-width: 992px) {
+    .checkout-content-wrapper {
+        grid-template-columns: 1fr; /* Stack columns on smaller screens */
+        gap: 30px; /* Reduce gap when stacked */
+        padding: 0 20px; /* Add horizontal padding to wrapper */
+    }
+
+    .checkout-billing-details,
+    .checkout-order-summary {
+        padding: 20px; /* Adjust internal padding for smaller screens */
+    }
+
+    .checkout-billing-details h2,
+    .checkout-order-summary h2 {
+        font-size: 1.5em; /* Slightly smaller headings */
+        margin-bottom: 20px;
+    }
+
+    .billing-form .form-row {
+        flex-direction: column; /* Stack half-width fields vertically */
+        gap: 0; /* Remove gap when stacked */
+    }
+
+    .billing-form .form-row .form-group.half-width {
+        margin-bottom: 20px; /* Re-add margin when stacked */
+    }
+
+    .billing-form .form-row .form-group.half-width:last-child {
+        margin-bottom: 0; /* No bottom margin for the last stacked group in a row */
+    }
+
+    .checkout-order-summary .order-review-table th,
+    .checkout-order-summary .order-review-table td {
+        padding: 12px 15px; /* Adjust table cell padding */
+        font-size: 0.9em; /* Slightly smaller font for table content */
+    }
+
+    .checkout-order-summary .order-review-table .order-total th,
+    .checkout-order-summary .order-review-table .order-total td {
+        font-size: 1.1em; /* Adjust total font size */
+    }
+
+    .place-order-btn {
+        padding: 12px 15px;
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .checkout-page-container {
+        padding: 40px 0; /* Less vertical padding on very small screens */
+    }
+    .checkout-content-wrapper {
+        padding: 0 15px; /* Tighter horizontal padding */
+    }
+
+    .checkout-billing-details h2,
+    .checkout-order-summary h2 {
+        font-size: 1.3em; /* Even smaller headings for mobile */
+        margin-bottom: 15px;
+    }
+
+    .billing-form .form-group {
+        margin-bottom: 15px; /* Reduce space between form groups */
+    }
+
+    .billing-form label,
+    .payment-option label {
+        font-size: 0.9em; /* Smaller label fonts */
+    }
+
+    .billing-form input[type="text"],
+    .billing-form input[type="email"],
+    .billing-form input[type="tel"],
+    .billing-form textarea {
+        padding: 10px 12px; /* Slightly smaller input padding */
+        font-size: 0.9em;
+    }
+
+    .order-review-table {
+        /* Ensure table content is scrollable if it exceeds screen width */
+        overflow-x: auto;
+    }
+    .order-review-table table {
+        /* Make table explicitly wide enough to prevent content squishing if necessary */
+        min-width: 300px; /* Example min-width, adjust based on content */
+    }
+    
+    .checkout-order-summary .order-review-table th,
+    .checkout-order-summary .order-review-table td {
+        padding: 10px 12px; /* Further adjust table cell padding */
+    }
+
+    .checkout-order-summary .order-review-table .order-total th,
+    .checkout-order-summary .order-review-table .order-total td {
+        font-size: 1em;
+    }
+}
+
+
+
+
+
+
+
+/* --- Profile Page Styles --- */
+
+.profile-page-container {
+    padding: 60px 0; /* Vertical padding consistent with other pages */
+    background-color: var(--global-color-0); /* Light background for the page */
+    /* Adjust min-height if needed based on header/footer heights for full page fill */
+    /* min-height: calc(100vh - var(--header-height, 0) - var(--footer-height, 0)); */
+}
+
+/* Styling for the main sections (profile-card, order-history, favorites) */
+.profile-card,
+.order-history-section,
+.favorites-section {
+    max-width: 1000px; /* INCREASED WIDTH for more space on larger screens */
+    margin: 0 auto 30px auto; /* Center sections and add space between them */
+    background-color: var(--global-color-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 30px; /* Internal padding for the content boxes */
+}
+
+/* Remove bottom margin from the last section on the page */
+.profile-page-container > div:last-child {
+    margin-bottom: 0;
+}
+
+/* Headings for profile sections */
+.profile-card h2,
+.order-history-section h2,
+.favorites-section h2 {
+    font-family: var(--font-01);
+    font-size: 1.8em;
+    color: var(--global-color-dark-gray);
+    margin-bottom: 25px;
+    text-align: left;
+}
+
+/* Profile Card Specifics */
+.profile-card .profile-info p {
+    font-family: var(--font-01);
+    font-size: 1.1em;
+    color: var(--global-color-dark-gray);
+    margin-bottom: 12px; /* Space between each line of info */
+    line-height: 1.5;
+}
+
+.profile-card .profile-info p:last-child {
+    margin-bottom: 0; /* No bottom margin for the very last line */
+}
+
+.profile-card .profile-info strong {
+    font-weight: 600;
+    color: #555; /* Slightly lighter than main text for labels */
+    margin-right: 5px;
+}
+
+.profile-card .profile-info span {
+    font-weight: 400; /* Normal weight for the dynamically loaded values */
+}
+
+/* Logout Button */
+#logout-button {
+    /* Assuming .auth-button class has base styles. If not, add them here. */
+    display: block; /* Make it a block element */
+    width: fit-content; /* Adjust width to its content */
+    margin-top: 30px;
+    padding: 10px 25px;
+    background-color: var(--global-color-1);
+    color: var(--global-color-white);
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#logout-button:hover {
+    background-color: var(--global-color-2);
+    box-shadow: 0 4px 10px rgba(var(--global-color-1-rgb), 0.2);
+}
+
+/* Placeholder text styles for Order History and Favorites (before JS loads content) */
+#orders-list p,
+#favorites-list p {
+    font-family: var(--font-01);
+    color: #777;
+    font-size: 1em;
+    text-align: center; /* Center the "Loading..." messages */
+}
+
+/* Favorites Section - Product Grid (reusing styles for .product-grid) */
+.favorites-section .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Responsive grid for products */
+    gap: 20px; /* Space between product cards */
+    /* Ensure the product grid fills its container */
+    width: 100%;
+}
+
+/* NEW: Ensure images within the product grid are responsive and contained */
+/* This assumes any <img> elements directly within the .product-grid (or its items) */
+.favorites-section .product-grid img {
+    max-width: 100%; /* CRITICAL: Prevents images from overflowing their parent container */
+    height: auto; /* Maintains aspect ratio of the image */
+    display: block; /* Removes any extra space below the image */
+    border-radius: 4px; /* Optional: Consistent border-radius for product images */
+    object-fit: cover; /* Optional: If product cards have fixed heights, this helps images fill the space */
+}
+
+/* NEW: If the individual product card itself (the direct child of .product-grid) needs overflow handling */
+.favorites-section .product-grid > div { /* Assuming the direct children of .product-grid are the product card containers */
+    overflow: hidden; /* Helps contain content that might have margins */
+}
+
+
+/* --- Responsive Adjustments for Profile Page --- */
+
+/* NEW: Added new breakpoint for wider screens to manage max-width */
+@media (max-width: 1024px) {
+    .profile-card,
+    .order-history-section,
+    .favorites-section {
+        max-width: 90%; /* Start reducing max-width earlier to prevent too much empty space on mid-size screens */
+    }
+}
+
+@media (max-width: 768px) { /* Existing breakpoint */
+    .profile-page-container {
+        padding: 40px 0;
+    }
+    .profile-card,
+    .order-history-section,
+    .favorites-section {
+        /* max-width will now be handled by the 1024px breakpoint, or revert to this percentage */
+        max-width: 90%; /* Continues from 1024px breakpoint if applicable */
+        margin: 0 auto 25px auto;
+        padding: 25px;
+    }
+    .profile-card h2,
+    .order-history-section h2,
+    .favorites-section h2 {
+        font-size: 1.6em;
+        margin-bottom: 20px;
+    }
+    .profile-card .profile-info p {
+        font-size: 1em;
+        margin-bottom: 10px;
+    }
+    #logout-button {
+        width: 100%;
+        padding: 10px 15px;
+    }
+    .favorites-section .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* Adjusted min-width slightly */
+        gap: 15px;
+    }
+}
+
+@media (max-width: 576px) { /* Existing breakpoint */
+    .profile-page-container {
+        padding: 30px 0;
+    }
+    .profile-card,
+    .order-history-section,
+    .favorites-section {
+        padding: 20px;
+        margin-bottom: 20px;
+        max-width: 95%; /* Wider percentage to fill very small screens better */
+    }
+    .profile-card h2,
+    .order-history-section h2,
+    .favorites-section h2 {
+        font-size: 1.4em;
+        margin-bottom: 15px;
+    }
+    .profile-card .profile-info p {
+        font-size: 0.95em;
+        margin-bottom: 8px;
+    }
+    .favorites-section .product-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Further reduce min-width for cards */
+        gap: 10px;
+    }
+}
+
+@media (max-width: 400px) { /* Existing breakpoint */
+    .profile-card,
+    .order-history-section,
+    .favorites-section {
+        padding: 15px;
+    }
+    .profile-card h2,
+    .order-history-section h2,
+    .favorites-section h2 {
+        font-size: 1.2em;
+    }
+    .profile-card .profile-info p {
+        font-size: 0.9em;
+    }
+    .favorites-section .product-grid {
+        grid-template-columns: 1fr; /* Single column for very small screens */
+    }
+}
+
+
+
+
+
+
+
+/* --- Login/Signup Page General Styles --- */
+
+/* This targets both the sign-up and login page containers, assuming similar structure */
+.signup-page-container,
+.login-page-container {
+    padding: 80px 0; /* Generous vertical padding to center the form visually */
+    background-color: var(--global-color-0); /* Light background for the whole page */
+    min-height: calc(100vh - var(--header-height, 0px) - var(--footer-height, 0px)); /* Ensures content takes up available height */
+    display: flex; /* Use flexbox to center the form wrapper */
+    align-items: center; /* Vertically center the form wrapper */
+    justify-content: center; /* Horizontally center the form wrapper */
+}
+
+/* Styling for the central form wrapper (the "card" containing the form) */
+.signup-form-wrapper,
+.login-form-wrapper { /* Apply to both sign-up and login wrappers */
+    max-width: 450px; /* MODIFIED: A slightly narrower width for a more compact look */
+    width: 90%; /* Responsive width: takes 90% of parent width, up to max-width */
+    background-color: var(--global-color-white); /* White background for the card */
+    border-radius: 8px; /* Slightly rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* A more prominent shadow for focus */
+    padding: 40px; /* Ample internal padding */
+    text-align: center; /* Centers the heading and switch text */
+}
+
+/* Headings for the authentication forms */
+.signup-form-wrapper h2,
+.login-form-wrapper h2 {
+    font-family: var(--font-01);
+    font-size: 2.2em; /* Larger, welcoming heading */
+    color: var(--global-color-dark-gray);
+    margin-bottom: 30px;
+    text-align: center; /* Ensures heading remains centered */
+}
+
+/* --- Form Specific Styles (Auth Form) --- */
+/* These styles adapt common form elements to the auth context */
+
+.auth-form .form-group {
+    margin-bottom: 20px; /* Space between form fields */
+    text-align: left; /* Aligns labels and inputs to the left within their group */
+}
+
+.auth-form .form-group label {
+    display: block; /* Makes label take full width and sit above input */
+    font-family: var(--font-01);
+    font-weight: 600; /* Slightly bolder labels */
+    color: var(--global-color-dark-gray);
+    margin-bottom: 8px; /* Space between label and input */
+    font-size: 0.95em;
+}
+
+.auth-form input[type="text"],
+.auth-form input[type="email"],
+.auth-form input[type="password"],
+.auth-form input[type="tel"] {
+    width: 100%; /* Inputs take full width of their container */
+    padding: 12px 15px; /* Comfortable padding inside inputs */
+    border: 1px solid var(--global-color-border); /* Subtle border */
+    border-radius: 5px; /* Rounded input corners */
+    font-family: var(--font-01);
+    font-size: 1em;
+    color: #555;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transition for focus state */
+}
+
+.auth-form input:focus {
+    border-color: var(--global-color-1); /* Highlight border on focus with primary color */
+    box-shadow: 0 0 0 2px rgba(var(--global-color-1-rgb), 0.2); /* Subtle shadow on focus */
+    outline: none; /* Remove default browser outline */
+}
+
+.auth-form input::placeholder {
+    color: #aaa; /* Lighter placeholder text */
+}
+
+/* Styling for rows containing half-width fields (e.g., First Name/Last Name) */
+.auth-form .form-row {
+    display: flex; /* Use flexbox to put fields side-by-side */
+    gap: 20px; /* Space between the half-width fields */
+    margin-bottom: 20px; /* Space below the entire row */
+}
+
+.auth-form .form-row .form-group.half-width {
+    flex: 1; /* Each half-width group takes equal space */
+    margin-bottom: 0; /* Remove individual bottom margin, as it's handled by the row */
+}
+
+/* Specific styling for the optional second address line input */
+/* This targets the second text input that follows the street address input */
+.auth-form #signup-street-address + input[type="text"] {
+    margin-top: 15px; /* Adds space between the primary street address and the optional line */
+}
+
+/* Error Message Styling */
+#signup-error-message, /* Target specific ID for signup error message */
+.error-message { /* General class for error messages */
+    color: red; /* Red color for error text */
+    font-family: var(--font-01);
+    font-size: 0.9em;
+    margin-top: -10px; /* Pull it slightly closer to the input field above */
+    margin-bottom: 20px; /* Space before the submit button */
+    text-align: center;
+}
+
+/* Authentication Button Styling (Sign Up button) */
+.auth-button {
+    display: block; /* Make the button take full width */
+    width: 100%;
+    padding: 15px 20px;
+    background-color: var(--global-color-1); /* Primary brand color */
+    color: var(--global-color-white); /* White text */
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    font-weight: 700;
+    text-transform: uppercase; /* Uppercase text for impact */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px; /* Space above the button */
+}
+
+.auth-button:hover {
+    background-color: var(--global-color-2); /* Darker shade on hover */
+    box-shadow: 0 4px 15px rgba(var(--global-color-1-rgb), 0.3); /* More prominent shadow on hover */
+}
+
+/* Switch link (e.g., "Already have an account? Login here") */
+.auth-switch {
+    font-family: var(--font-01);
+    font-size: 1em;
+    color: #777; /* Subtle gray text */
+    margin-top: 25px; /* Space above the switch text */
+    text-align: center;
+}
+
+.auth-switch a {
+    color: var(--global-color-1); /* Link color matches primary brand color */
+    text-decoration: none; /* No underline by default */
+    font-weight: 600; /* Bolder link text */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.auth-switch a:hover {
+    color: var(--global-color-2); /* Darker shade on hover */
+    text-decoration: underline; /* Underline on hover for better UX */
+}
+
+
+/* --- Responsive Adjustments for Login/Signup Pages --- */
+
+@media (max-width: 768px) {
+    .signup-page-container,
+    .login-page-container {
+        padding: 50px 0; /* Reduce vertical padding on smaller screens */
+    }
+    .signup-form-wrapper,
+    .login-form-wrapper {
+        width: 95%; /* Make the form wrapper wider on tablets/larger mobiles */
+        padding: 30px; /* Adjust internal padding */
+    }
+    .signup-form-wrapper h2,
+    .login-form-wrapper h2 {
+        font-size: 1.8em; /* Smaller heading on mid-size screens */
+        margin-bottom: 25px;
+    }
+    .auth-form .form-row {
+        flex-direction: column; /* Stack half-width fields vertically on smaller screens */
+        gap: 0; /* Remove gap when fields are stacked */
+    }
+    .auth-form .form-row .form-group.half-width {
+        margin-bottom: 20px; /* Re-add bottom margin when stacked vertically */
+    }
+    .auth-form .form-row .form-group.half-width:last-child {
+        margin-bottom: 0; /* Remove bottom margin for the last stacked group in a row */
+    }
+    .auth-button {
+        padding: 12px 15px; /* Slightly smaller button padding */
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 576px) {
+    .signup-page-container,
+    .login-page-container {
+        padding: 30px 0; /* Even less vertical padding for small mobiles */
+    }
+    .signup-form-wrapper,
+    .login-form-wrapper {
+        padding: 20px; /* Tighter internal padding */
+    }
+    .signup-form-wrapper h2,
+    .login-form-wrapper h2 {
+        font-size: 1.5em; /* Further reduce heading size */
+        margin-bottom: 20px;
+    }
+    .auth-form .form-group {
+        margin-bottom: 15px; /* Reduce space between form groups */
+    }
+    .auth-form label {
+        font-size: 0.9em; /* Smaller label fonts */
+    }
+    .auth-form input[type="text"],
+    .auth-form input[type="email"],
+    .auth-form input[type="password"],
+    .auth-form input[type="tel"] {
+        padding: 10px 12px; /* Slightly smaller input padding */
+        font-size: 0.9em;
+    }
+    .auth-switch {
+        font-size: 0.9em;
+        margin-top: 20px;
+    }
+}

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - Ruءya Eyewear</title>
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <script type="module">
+        import { initializeApp, getApps } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+        // Make sure this firebaseConfig EXACTLY matches what's in your Firebase Console
+        const firebaseConfig = {
+            apiKey: "AIzaSyAAo_jXW1bMCjsUlW8wSeT4zoaXyw5JFVU",
+            authDomain: "ruya-eyewear-e-commerce.firebaseapp.com",
+            projectId: "ruya-eyewear-e-commerce",
+            storageBucket: "ruya-eyewear-e-commerce.firebasestorage.app",
+            messagingSenderId: "963912557816",
+            appId: "1:963912557816:web:81bfb191bc8f2c1e19c70d"
+        };
+        if (getApps().length === 0) {
+            initializeApp(firebaseConfig);
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <div class="logo">
+                <a href="index.html">Ruءya Eyewear</a>
+            </div>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="shop.html">Shop</a>
+
+                <span id="user-display-name" style="display:none;"></span>
+                <a href="Html/login.html" id="auth-link">Login</a>
+
+                <a href="cart.html" class="cart-link">
+                    Cart <span id="cart-count">0</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="profile-page-container">
+        <div class="profile-card">
+            <h2>My Profile</h2>
+            <div class="profile-info">
+                <p><strong>First Name:</strong> <span id="profile-first-name"></span></p>
+                <p><strong>Last Name:</strong> <span id="profile-last-name"></span></p>
+                <p><strong>Email:</strong> <span id="profile-email"></span></p>
+                <p><strong>Phone:</strong> <span id="profile-phone"></span></p>
+                <p><strong>Street Address:</strong> <span id="profile-street-address"></span></p>
+                <p><strong>City:</strong> <span id="profile-city"></span></p>
+                <p><strong>Country:</strong> <span id="profile-country"></span></p>
+            </div>
+
+            <button id="logout-button" class="auth-button">Logout</button>
+        </div>
+
+        <div class="order-history-section">
+            <h2>Order History</h2>
+            <div id="orders-list">
+                <p style="text-align: center; padding: 20px;">Loading your orders...</p>
+            </div>
+        </div>
+
+        <div class="favorites-section">
+            <h2>My Favorites</h2>
+            <div id="favorites-list" class="product-grid">
+                <p style="text-align: center; padding: 20px; grid-column: 1 / -1;">Loading your favorite products...</p>
+            </div>
+        </div>
+        </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col footer-logo-col">
+                <div class="logo">
+                    <a href="index.html">Ruءya Eyewear</a>
+                </div>
+                <p class="copyright-desktop">© 2025 Ruءya Eyewear. All rights reserved.</p>
+            </div>
+
+            <div class="footer-col footer-contact-col">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-phone"></i> Phone: +961 123 456 78</p>
+                <p><i class="fas fa-envelope"></i> Email: info@ruءyaeyewear.com</p>
+            </div>
+
+            <div class="footer-col footer-links-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col footer-social-col">
+                <h3>Follow Us</h3>
+                <div class="social-icons">
+                    <a href="#" target="_blank" class="social-icon-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" target="_blank" class="social-icon-link"><i class="fab fa-whatsapp"></i></a>
+                    <a href="#" target="_blank" class="social-icon-link"><i class="fab fa-facebook-f"></i></a>
+                </div>
+            </div>
+
+            <p class="copyright-mobile">© 2025 Ruءya Eyewear. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="/JS/auth.js" type="module"></script>
+    <script src="/JS/common.js" type="module"></script>
+    <script src="/JS/profile.js" type="module"></script>
+</body>
+</html>
