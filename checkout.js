@@ -1,5 +1,5 @@
 // JS/checkout.js
-import { updateCartCount } from './common.js';
+import { updateCartCount } from 'common.js';
 // Firebase Imports for Firestore and Auth
 import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 import { getAuth } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
