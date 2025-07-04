@@ -1,6 +1,6 @@
 // JS/shop.js
 
-import { updateCartCount } from 'common.js'; // Ensure this path is correct
+import { updateCartCount } from './common.js'; // Ensure this path is correct
 
 // 1. Import necessary Firebase modules
 import {
