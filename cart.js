@@ -1,6 +1,6 @@
 // JS/cart.js
 
-import { updateCartCount } from 'common.js'; // Ensure this path is correct
+import { updateCartCount } from './common.js'; // Ensure this path is correct
 
 // --- DOM Elements (Get references to elements with IDs for direct access) ---
 const cartTableBody = document.getElementById('cart-items-body');
