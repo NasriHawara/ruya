@@ -193,7 +193,7 @@ async function handlePlaceOrder(event) { // Added 'async' keyword here
 
         const encodedMessage = encodeURIComponent(message);
 
-        const yourWhatsappNumber = '96176829297'; 
+        const yourWhatsappNumber = '+96176829297'; 
         const whatsappURL = `https://wa.me/${yourWhatsappNumber}?text=${encodedMessage}`;
 
         // Open WhatsApp in a new tab
