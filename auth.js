@@ -18,7 +18,7 @@ import {
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
 
 // Import common functions
-import { updateCartCount } from 'common.js';
+import { updateCartCount } from './common.js';
 
 // Initialize Firebase services
 const app = getApp(); // Assumes Firebase app is initialized in HTML
