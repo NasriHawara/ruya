@@ -241,6 +241,6 @@ onAuthStateChanged(auth, async (user) => {
     } else {
         // User is signed out, redirect to login page
         console.log('No user signed in. Redirecting to login page.');
-        window.location.href = '/Html/login.html';
+        window.location.href = 'login.html';
     }
 });
