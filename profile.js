@@ -166,7 +166,7 @@ async function fetchAndDisplayFavorites(userId) {
         const querySnapshot = await getDocs(q);
 
         if (querySnapshot.empty) {
-            favoritesListDiv.innerHTML = '<p style="text-align: center; padding: 20px; grid-column: 1 / -1;">You have no favorite products yet. Go to the <a href="/shop.html">shop page</a> to add some!</p>';
+            favoritesListDiv.innerHTML = '<p style="text-align: center; padding: 20px; grid-column: 1 / -1;">You have no favorite products yet. Go to the <a href="shop.html">shop page</a> to add some!</p>';
             return;
         }
 
@@ -230,7 +230,7 @@ onAuthStateChanged(auth, async (user) => {
                 try {
                     await signOut(auth);
                     console.log('User logged out successfully.');
-                    window.location.href = '/Html/login.html'; // Redirect to login page after logout
+                    window.location.href = 'login.html'; // Redirect to login page after logout
                 } catch (error) {
                     console.error('Error logging out:', error.message);
                     alert('Failed to log out. Please try again.');
