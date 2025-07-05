@@ -85,7 +85,7 @@ function renderOrderSummary() {
 }
 
 // Function to handle the "Place order" (WhatsApp) button click
-async function handlePlaceOrder(event) { // Added 'async' keyword here
+async function handlePlaceOrder(event) {
     // Prevent the default form submission which would reload the page
     event.preventDefault();
 
@@ -137,14 +137,60 @@ async function handlePlaceOrder(event) { // Added 'async' keyword here
     const totalAmount = subtotal + shippingCost;
 
 
-    // --- Firestore Order Saving ---
+    // --- START OF MODIFIED SECTION FOR WHATSAPP RELIABILITY ---
+
+    // 1. Construct the WhatsApp Message
+    let message = `*New Order from Ruءya Eyewear!*\n\n`; // Use \n for new line
+    message += `*Customer Details:*\n`;
+    message += `Name: ${firstName} ${lastName}\n`;
+    message += `Phone: ${phone}\n`;
+    message += `Email: ${email}\n`;
+    message += `Address: ${streetAddress}, ${city}, ${country}\n`;
+    if (orderNotes) {
+        message += `Notes: ${orderNotes}\n`;
+    }
+    message += `\n*Order Summary:*\n`;
+
+    cartItemsArray.forEach(item => {
+        message += `- ${item.name} x ${item.quantity} ($${(item.price * item.quantity).toFixed(2)})\n`;
+    });
+
+    message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
+    message += `Shipping: $${shippingCost.toFixed(2)}\n`;
+    message += `*Total: $${totalAmount.toFixed(2)}*\n\n`;
+    message += `*Payment Method: Cash on Delivery*\n`;
+    // *** IMPORTANT: Order ID is NOT available here yet (Firestore save hasn't happened). ***
+    // *** It will be provided to the user in the alert AFTER the save. ***
+    message += `Please confirm this order.`;
+
+    const encodedMessage = encodeURIComponent(message);
+    const yourWhatsappNumber = '+96176829297'; // Corrected to include '+' for international format
+    const whatsappURL = `https://wa.me/${yourWhatsappNumber}?text=${encodedMessage}`;
+
+    // 2. Open WhatsApp in a new tab - THIS IS THE CRITICAL LINE MOVED UP
+    // This happens immediately on user gesture, BEFORE any asynchronous Firestore operation.
+    const newWindow = window.open(whatsappURL, '_blank');
+
+    // 3. Clear cart immediately after WhatsApp is launched (as the order initiation happened)
+    localStorage.removeItem('cart');
+    updateCartCount(); // Update navbar count to 0
+
+    // --- END OF MODIFIED SECTION FOR WHATSAPP RELIABILITY ---
+
+
+    // --- Firestore Order Saving (this now happens AFTER WhatsApp is launched) ---
     const user = auth.currentUser;
     if (!user) {
         alert('You must be logged in to place an order. Please log in or sign up.');
+        // Attempt to close the opened WhatsApp window if the user isn't logged in
+        if (newWindow && !newWindow.closed) {
+            newWindow.close();
+        }
         window.location.href = 'login.html'; // Redirect to login page
         return;
     }
 
+    let orderIdForMessage = 'N/A'; // Placeholder for the Order ID in the final alert
     try {
         const orderData = {
             userId: user.uid,
@@ -166,55 +212,16 @@ async function handlePlaceOrder(event) { // Added 'async' keyword here
         };
 
         const docRef = await addDoc(collection(db, "orders"), orderData);
+        orderIdForMessage = docRef.id; // Get the actual Order ID from Firestore
         console.log("Order saved with ID: ", docRef.id);
 
-        // --- Construct the WhatsApp Message (existing logic) ---
-        let message = `*New Order from Ruءya Eyewear!*\n\n`; // Use \n for new line
-        message += `*Customer Details:*\n`;
-        message += `Name: ${firstName} ${lastName}\n`;
-        message += `Phone: ${phone}\n`;
-        message += `Email: ${email}\n`;
-        message += `Address: ${streetAddress}, ${city}, ${country}\n`;
-        if (orderNotes) {
-            message += `Notes: ${orderNotes}\n`;
-        }
-        message += `\n*Order Summary:*\n`;
+        // --- Final confirmation and redirect ---
+        // The setTimeout is removed as it's no longer necessary with the reordered logic.
+        // Alert includes the Order ID generated from Firestore.
+        alert(`Your order (Order ID: ${orderIdForMessage}) has been placed and details prepared for WhatsApp! Please send the message to confirm your order. We will contact you shortly.`);
 
-        cartItemsArray.forEach(item => {
-            message += `- ${item.name} x ${item.quantity} ($${(item.price * item.quantity).toFixed(2)})\n`;
-        });
-
-        message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
-        message += `Shipping: $${shippingCost.toFixed(2)}\n`;
-        message += `*Total: $${totalAmount.toFixed(2)}*\n\n`;
-        message += `*Payment Method: Cash on Delivery*\n`;
-        message += `*Order ID (for reference): ${docRef.id}*\n\n`; // Add Order ID
-        message += `Please confirm this order.`;
-
-        const encodedMessage = encodeURIComponent(message);
-
-        const yourWhatsappNumber = '+96176829297'; 
-        const whatsappURL = `https://wa.me/${yourWhatsappNumber}?text=${encodedMessage}`;
-
-// Open WhatsApp in a new tab
-const newWindow = window.open(whatsappURL, '_blank');
-
-// Clear cart immediately
-localStorage.removeItem('cart');
-updateCartCount(); // Update navbar count to 0
-
-// Delay the alert and redirect slightly to give the browser time to open WhatsApp
-setTimeout(() => {
-    alert('Your order has been placed and details prepared for WhatsApp! Please send the message to confirm your order. We will contact you shortly.');
-    // Redirect back to shop or a thank you page
-    // Only redirect if the new WhatsApp window was actually opened (though this is best effort)
-    if (newWindow && !newWindow.closed) { // Check if the window is still open or was successfully launched
-         window.location.href = 'shop.html';
-    } else {
-        // Fallback if the new window was blocked/closed immediately
+        // Redirect back to shop or a thank you page AFTER the alert
         window.location.href = 'shop.html';
-    }
-}, 500); // 500 milliseconds (0.5 seconds) delay
 
     } catch (error) {
         console.error("Error saving order: ", error);
