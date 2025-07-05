@@ -96,7 +96,7 @@ header {
     background-image: url('background.jpg');
     background-size: cover;
     background-position: center;
-    background-attachment: fixed; /* Optional: adds a parallax effect */
+    background-attachment: scroll; /* Optional: adds a parallax effect */
     height: 70vh; /* Use viewport height for responsiveness, e.g., 70% of viewport height */
     min-height: 450px; /* Ensure a minimum height on very small screens */
     display: flex;
@@ -504,6 +504,13 @@ footer {
 
 
 /* --- Media Queries --- */
+
+/* Apply 'fixed' only for screens wider than 768px (common tablet breakpoint) */
+@media (min-width: 769px) { /* IMPORTANT: Use min-width for desktop/larger screens */
+    .intro-banner {
+        background-attachment: fixed; /* Re-enable parallax for desktop */
+    }
+}
 
 /* Tablet & Smaller Devices (up to 992px) */
 @media (max-width: 992px) {
