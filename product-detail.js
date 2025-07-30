@@ -168,7 +168,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
             // --- Handle Images (Main and Thumbnails) ---
             if (mainProductImageElement) {
-                mainProductImageElement.src = product.imageWebpUrl || product.imageFallbackUrl || "/images/placeholder.png";
+                mainProductImageElement.src = product.imageUrl || product.imageWebpUrl || product.imageFallbackUrl || "/images/placeholder.png";
                 mainProductImageElement.alt = product.name;
             }
 
@@ -177,10 +177,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 const allImages = [];
                 // Add the main product image as the first thumbnail
-                if (product.imageWebpUrl || product.imageFallbackUrl) {
+                if ( product.imageWebpUrl || product.imageFallbackUrl ) {
                     allImages.push({
                         webp: product.imageWebpUrl,
-                        fallback: product.imageFallbackUrl
+                        fallback: product.imageFallbackUrl,
+                        mainUrl: product.imageUrl 
                     });
                 }
                 // Add gallery images if they exist
@@ -190,7 +191,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                 allImages.forEach((img, index) => {
                     const thumbnail = document.createElement('img');
-                    thumbnail.src = img.fallback || img.webp || "/images/placeholder.png"; // Use fallback as default thumbnail src
+                    thumbnail.src = img.fallback || img.webp || mainImageUrl || "/images/placeholder.png"; // Use fallback as default thumbnail src
                     thumbnail.alt = `${product.name} thumbnail ${index + 1}`;
                     thumbnail.classList.add('thumbnail');
                     if (index === 0) {
@@ -199,10 +200,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
                     // Add click listener to switch main image
                     thumbnail.addEventListener('click', () => {
-                        mainProductImageElement.src = img.fallback || img.webp;
+                        mainProductImageElement.src = img.fallback || img.webp || mainImageUrl || product.imageUrl;
                         // Update active class for thumbnails
                         document.querySelectorAll('.thumbnail').forEach(thumb => thumb.classList.remove('active'));
                         thumbnail.classList.add('active');
+
+                            if (index === 0) {
+      mainProductImageElement.src = mainImageUrl;
+    }
                     });
                     thumbnailImagesContainer.appendChild(thumbnail);
                 });
