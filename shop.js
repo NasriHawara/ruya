@@ -149,10 +149,14 @@ function renderProductCard(product, productId) {
 
     productCard.innerHTML = `
         <div class="product-image-wrapper">
-            <picture>
-                <source srcset="${product.imageWebpUrl}" type="image/webp">
-                <img src="${product.imageFallbackUrl}" alt="${product.name}" class="product-image">
-            </picture>
+<picture>
+  <!-- Use imageUrl as both webp and fallback for main display -->
+  <source srcset="${product.imageUrl}" type="image/webp">
+  <img src="${product.imageUrl}" 
+       alt="${product.name}" 
+       class="product-image"
+       onerror="this.src='https://placehold.co/300x300?text=Image+Not+Found'">
+</picture>
             <div class="product-actions">
                 <a href="product-detail.html?id=${productId}" class="action-btn quick-view" title="Quick View"><i class="fas fa-eye"></i></a>
                 <button class="action-btn add-to-cart-btn" title="Add to Cart" data-product-id="${productId}"><i class="fas fa-shopping-cart"></i></button>
