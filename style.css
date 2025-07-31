@@ -93,7 +93,7 @@ header {
 
 /* ===== Intro Banner (Above Slider) ===== */
 .intro-banner {
-    background-image: url('bgx1.jpg');
+    background-image: url('bgx1.JPG');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Optional: adds a parallax effect */
