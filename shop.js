@@ -329,7 +329,15 @@ async function fetchAndDisplayProducts(direction = 'initial') {
 
         q = query(prevQ, startAfter(firstVisible), limit(productsPerPage)); // Use startAfter with reversed order
     } else { // 'initial' or 'filterSortChange'
+            if (currentPage > 1) {
+        // Fetch all docs up to the target page to get the starting point
+        const tempQuery = query(q, limit(productsPerPage * (currentPage - 1)));
+        const tempSnapshot = await getDocs(tempQuery);
+        const lastDoc = tempSnapshot.docs[tempSnapshot.docs.length - 1];
+        q = query(q, startAfter(lastDoc), limit(productsPerPage));
+    } else {
         q = query(q, limit(productsPerPage));
+    }
     }
 
     try {
