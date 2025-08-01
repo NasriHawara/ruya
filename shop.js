@@ -155,6 +155,7 @@ function renderProductCard(product, productId) {
   <img src="${product.imageUrl}" 
        alt="${product.name}" 
        class="product-image"
+              loading="lazy" 
        onerror="this.src='https://placehold.co/300x300?text=Image+Not+Found'">
 </picture>
             <div class="product-actions">
