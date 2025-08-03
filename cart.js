@@ -37,7 +37,7 @@ function renderCartItems() {
     }
 
     let subtotal = 0;
-    const shippingCost = 10.00; // Flat rate shipping for now
+    const shippingCost = 5.00; // Flat rate shipping for now
 
     cartItemsArray.forEach(item => {
         const itemSubtotal = item.price * item.quantity;
@@ -72,7 +72,7 @@ function renderCartItems() {
 
     // Update cart totals summary
     if (subtotalElement) subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-    if (shippingElement) shippingElement.textContent = `Flat rate: $${shippingCost.toFixed(2)}`;
+    if (shippingElement) shippingElement.textContent = ` $${shippingCost.toFixed(2)}`;
     if (orderTotalElement) orderTotalElement.textContent = `$${(subtotal + shippingCost).toFixed(2)}`;
 
     // Attach event listeners for quantity and remove buttons after rendering
