@@ -53,7 +53,7 @@ let lastVisible = null; // Last document from the current page's query for 'next
 let firstVisible = null; // First document from the current page's query for 'prev' pagination
 let currentPage = 1;
 let totalProductsCount = 0; // To store the total number of products matching current filters
-
+let pageSnapshots = [];
 // Global variable to store current user's favorite product IDs
 // This will be populated once on auth state change and passed to renderProductCard
 let globalCurrentUserFavorites = new Set();
@@ -70,7 +70,7 @@ function addToCart(productId, productData, quantity = 1) {
             id: productId,
             name: productData.name,
             price: productData.price,
-            image: productData.imageWebpUrl || productData.imageFallbackUrl,
+            image: productData.imageWebpUrl || productData.imageFallbackUrl || productData.imageUrl,
             quantity: quantity
         };
     }
@@ -155,7 +155,7 @@ function renderProductCard(product, productId) {
   <img src="${product.imageUrl}" 
        alt="${product.name}" 
        class="product-image"
-              loading="lazy" 
+       loading="lazy" 
        onerror="this.src='https://placehold.co/300x300?text=Image+Not+Found'">
 </picture>
             <div class="product-actions">
@@ -329,15 +329,22 @@ async function fetchAndDisplayProducts(direction = 'initial') {
 
         q = query(prevQ, startAfter(firstVisible), limit(productsPerPage)); // Use startAfter with reversed order
     } else { // 'initial' or 'filterSortChange'
-            if (currentPage > 1) {
-        // Fetch all docs up to the target page to get the starting point
-        const tempQuery = query(q, limit(productsPerPage * (currentPage - 1)));
-        const tempSnapshot = await getDocs(tempQuery);
-        const lastDoc = tempSnapshot.docs[tempSnapshot.docs.length - 1];
-        q = query(q, startAfter(lastDoc), limit(productsPerPage));
-    } else {
-        q = query(q, limit(productsPerPage));
-    }
+        if (currentPage > 1) {
+            // Check if we have cached snapshots for this page
+            if (pageSnapshots[currentPage]) {
+                firstVisible = pageSnapshots[currentPage].firstVisible;
+                lastVisible = pageSnapshots[currentPage].lastVisible;
+                q = query(q, startAfter(lastVisible), limit(productsPerPage));
+            } else {
+                // Fetch all docs up to the target page to get the starting point
+                const tempQuery = query(q, limit(productsPerPage * (currentPage - 1)));
+                const tempSnapshot = await getDocs(tempQuery);
+                const lastDoc = tempSnapshot.docs[tempSnapshot.docs.length - 1];
+                q = query(q, startAfter(lastDoc), limit(productsPerPage));
+            }
+        } else {
+            q = query(q, limit(productsPerPage));
+        }
     }
 
     try {
@@ -366,12 +373,15 @@ async function fetchAndDisplayProducts(direction = 'initial') {
         firstVisible = productsToRender[0].docRef;
         lastVisible = productsToRender[productsToRender.length - 1].docRef;
 
+        // Store snapshots for this page
+        pageSnapshots[currentPage] = { firstVisible, lastVisible };
+
         productsToRender.forEach(item => {
-            const productCard = renderProductCard(item.data, item.id); // renderProductCard checks globalCurrentUserFavorites
+            const productCard = renderProductCard(item.data, item.id);
             productsContainer.appendChild(productCard);
         });
 
-        renderPagination(); // Update pagination UI after rendering products
+        renderPagination();
 
     } catch (error) {
         console.error("Error fetching products:", error);
@@ -394,6 +404,7 @@ applyFiltersBtn.addEventListener('click', () => {
     currentPage = 1; // Reset to first page on filter change
     lastVisible = null;
     firstVisible = null;
+    pageSnapshots = [];
     fetchAndDisplayProducts('filterSortChange');
 });
 
@@ -403,6 +414,7 @@ sortBySelect.addEventListener('change', () => {
     currentPage = 1; // Reset to first page on sort change
     lastVisible = null;
     firstVisible = null;
+    pageSnapshots = [];
     fetchAndDisplayProducts('filterSortChange');
 });
 
