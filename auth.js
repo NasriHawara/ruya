@@ -62,9 +62,23 @@ if (loginForm) {
         loginErrorMessage.textContent = ''; // Clear previous errors
 
         try {
-            await signInWithEmailAndPassword(auth, email, password);
-            console.log('User logged in successfully!');
-            window.location.href = 'index.html'; // Redirect to home page
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
+            console.log('User logged in successfully!', user.uid);
+
+            // --- NEW ADMIN CHECK LOGIC ---
+            const userDocRef = doc(db, "users", user.uid);
+            const userDocSnap = await getDoc(userDocRef);
+
+            if (userDocSnap.exists() && userDocSnap.data().isAdmin === true) {
+                console.log('Admin user detected. Redirecting to admin dashboard.');
+                window.location.href = '/Html/admin-dashboard.html'; // Redirect to admin dashboard
+            } else {
+                console.log('Regular user. Redirecting to home page.');
+                window.location.href = '/Html/index.html'; // Redirect to home page for regular users
+            }
+            // --- END NEW ADMIN CHECK LOGIC ---
+
         } catch (error) {
             console.error('Login error:', error.message);
             let errorMessage = 'Login failed. Please check your email and password.';
@@ -122,12 +136,13 @@ if (signupForm) {
                     city: city,
                     country: country
                 },
-                createdAt: new Date()
+                createdAt: new Date(),
+                isAdmin: false // Ensure new sign-ups are NOT admins by default
             });
             console.log('User profile saved to Firestore!');
 
             alert('Account created successfully! You are now logged in.');
-            window.location.href = 'index.html'; // Redirect to home
+            window.location.href = '/Html/index.html'; // Redirect to home
         } catch (error) {
             console.error('Signup error:', error.message);
             let errorMessage = 'Account creation failed.';
@@ -180,7 +195,7 @@ onAuthStateChanged(auth, async (user) => {
             displayName = userData.firstName || user.email; // Use first name if available
             
             // If on checkout page, pre-fill form
-            if (window.location.pathname.includes('checkout.html')) {
+            if (window.location.pathname.includes('/Html/checkout.html')) {
                 const firstNameInput = document.getElementById('first-name');
                 const lastNameInput = document.getElementById('last-name');
                 const emailInput = document.getElementById('email');
@@ -213,7 +228,7 @@ onAuthStateChanged(auth, async (user) => {
 
         // Update navbar for logged-in state (Profile link)
         if (authLink) {
-            authLink.href = 'profile.html'; // Link to the new profile page
+            authLink.href = '/Html/profile.html'; // Link to the new profile page
             authLink.textContent = 'Profile'; // Change text to "Profile"
             authLink.onclick = null; // No direct logout from this link
         }
@@ -224,13 +239,13 @@ onAuthStateChanged(auth, async (user) => {
 
         // Update navbar for logged-out state (Login link)
         if (authLink) {
-            authLink.href = 'login.html'; // Link back to the login page
+            authLink.href = '/Html/login.html'; // Link back to the login page
             authLink.textContent = 'Login'; // Change text back to "Login"
             authLink.onclick = null; // No click listener
         }
 
         // If on checkout page, ensure fields are editable if not logged in
-        if (window.location.pathname.includes('checkout.html')) {
+        if (window.location.pathname.includes('/Html/checkout.html')) {
             const checkoutForm = document.getElementById('checkout-form'); // Assuming you have a form ID
             if (checkoutForm) {
                 const inputs = checkoutForm.querySelectorAll('input');
