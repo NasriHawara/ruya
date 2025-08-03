@@ -50,7 +50,7 @@ function renderOrderSummary() {
 
     let subtotal = 0;
     // You can adjust shippingCost here or make it dynamic later if needed
-    const shippingCost = 10.00; // Flat rate shipping for Lebanon
+    const shippingCost = 5.00; // Flat rate shipping for Lebanon
 
     cartItemsArray.forEach(item => {
         const itemSubtotal = item.price * item.quantity;
@@ -74,8 +74,8 @@ function renderOrderSummary() {
             <td>$${subtotal.toFixed(2)}</td>
         </tr>
         <tr class="order-shipping">
-            <th>Shipping</th>
-            <td>Flat rate: $${shippingCost.toFixed(2)}</td>
+            <th>Delivery</th>
+            <td> $${shippingCost.toFixed(2)}</td>
         </tr>
         <tr class="order-total">
             <th>Total</th>
@@ -85,7 +85,7 @@ function renderOrderSummary() {
 }
 
 // Function to handle the "Place order" (WhatsApp) button click
-async function handlePlaceOrder(event) {
+async function handlePlaceOrder(event) { // Added 'async' keyword here
     // Prevent the default form submission which would reload the page
     event.preventDefault();
 
@@ -133,64 +133,18 @@ async function handlePlaceOrder(event) {
     orderItemsForFirestore.forEach(item => {
         subtotal += item.price * item.quantity; // Recalculate subtotal from original cart items
     });
-    const shippingCost = 10.00; // Keep consistent with renderOrderSummary
+    const shippingCost = 5.00; // Keep consistent with renderOrderSummary
     const totalAmount = subtotal + shippingCost;
 
 
-    // --- START OF MODIFIED SECTION FOR WHATSAPP RELIABILITY ---
-
-    // 1. Construct the WhatsApp Message
-    let message = `*New Order from Ruءya Eyewear!*\n\n`; // Use \n for new line
-    message += `*Customer Details:*\n`;
-    message += `Name: ${firstName} ${lastName}\n`;
-    message += `Phone: ${phone}\n`;
-    message += `Email: ${email}\n`;
-    message += `Address: ${streetAddress}, ${city}, ${country}\n`;
-    if (orderNotes) {
-        message += `Notes: ${orderNotes}\n`;
-    }
-    message += `\n*Order Summary:*\n`;
-
-    cartItemsArray.forEach(item => {
-        message += `- ${item.name} x ${item.quantity} ($${(item.price * item.quantity).toFixed(2)})\n`;
-    });
-
-    message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
-    message += `Shipping: $${shippingCost.toFixed(2)}\n`;
-    message += `*Total: $${totalAmount.toFixed(2)}*\n\n`;
-    message += `*Payment Method: Cash on Delivery*\n`;
-    // *** IMPORTANT: Order ID is NOT available here yet (Firestore save hasn't happened). ***
-    // *** It will be provided to the user in the alert AFTER the save. ***
-    message += `Please confirm this order.`;
-
-    const encodedMessage = encodeURIComponent(message);
-    const yourWhatsappNumber = '+96176829297'; // Corrected to include '+' for international format
-    const whatsappURL = `https://wa.me/${yourWhatsappNumber}?text=${encodedMessage}`;
-
-    // 2. Open WhatsApp in a new tab - THIS IS THE CRITICAL LINE MOVED UP
-    // This happens immediately on user gesture, BEFORE any asynchronous Firestore operation.
-    const newWindow = window.open(whatsappURL, '_blank');
-
-    // 3. Clear cart immediately after WhatsApp is launched (as the order initiation happened)
-    localStorage.removeItem('cart');
-    updateCartCount(); // Update navbar count to 0
-
-    // --- END OF MODIFIED SECTION FOR WHATSAPP RELIABILITY ---
-
-
-    // --- Firestore Order Saving (this now happens AFTER WhatsApp is launched) ---
+    // --- Firestore Order Saving ---
     const user = auth.currentUser;
     if (!user) {
         alert('You must be logged in to place an order. Please log in or sign up.');
-        // Attempt to close the opened WhatsApp window if the user isn't logged in
-        if (newWindow && !newWindow.closed) {
-            newWindow.close();
-        }
         window.location.href = 'login.html'; // Redirect to login page
         return;
     }
 
-    let orderIdForMessage = 'N/A'; // Placeholder for the Order ID in the final alert
     try {
         const orderData = {
             userId: user.uid,
@@ -208,19 +162,50 @@ async function handlePlaceOrder(event) {
             },
             orderNotes: orderNotes,
             paymentMethod: "Cash on Delivery", // Hardcoded as per current checkout flow
-            status: "Pending" // Initial status of the order
+            status: "Confirmed" // Initial status of the order
         };
 
         const docRef = await addDoc(collection(db, "orders"), orderData);
-        orderIdForMessage = docRef.id; // Get the actual Order ID from Firestore
         console.log("Order saved with ID: ", docRef.id);
 
-        // --- Final confirmation and redirect ---
-        // The setTimeout is removed as it's no longer necessary with the reordered logic.
-        // Alert includes the Order ID generated from Firestore.
-        alert(`Your order (Order ID: ${orderIdForMessage}) has been placed and details prepared for WhatsApp! Please send the message to confirm your order. We will contact you shortly.`);
+        // --- Construct the WhatsApp Message (existing logic) ---
+        let message = `*New Order from Ruءya Eyewear!*\n\n`; // Use \n for new line
+        message += `*Customer Details:*\n`;
+        message += `Name: ${firstName} ${lastName}\n`;
+        message += `Phone: ${phone}\n`;
+        message += `Email: ${email}\n`;
+        message += `Address: ${streetAddress}, ${city}, ${country}\n`;
+        if (orderNotes) {
+            message += `Notes: ${orderNotes}\n`;
+        }
+        message += `\n*Order Summary:*\n`;
 
-        // Redirect back to shop or a thank you page AFTER the alert
+        cartItemsArray.forEach(item => {
+            message += `- ${item.name} x ${item.quantity} ($${(item.price * item.quantity).toFixed(2)})\n`;
+        });
+
+        message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
+        message += `Shipping: $${shippingCost.toFixed(2)}\n`;
+        message += `*Total: $${totalAmount.toFixed(2)}*\n\n`;
+        message += `*Payment Method: Cash on Delivery*\n`;
+        message += `*Order ID (for reference): ${docRef.id}*\n\n`; // Add Order ID
+        message += `Please confirm this order.`;
+
+        const encodedMessage = encodeURIComponent(message);
+
+        const yourWhatsappNumber = '9613774989'; 
+        const whatsappURL = `https://wa.me/${yourWhatsappNumber}?text=${encodedMessage}`;
+
+        // Open WhatsApp in a new tab
+        window.open(whatsappURL, '_blank');
+
+        // Optionally: Clear cart after the order is initiated via WhatsApp AND saved to DB
+        localStorage.removeItem('cart');
+        updateCartCount(); // Update navbar count to 0
+
+        alert('Your order has been placed and details prepared for WhatsApp! Please send the message to confirm your order. We will contact you shortly.');
+        
+        // Redirect back to shop or a thank you page
         window.location.href = 'shop.html';
 
     } catch (error) {
