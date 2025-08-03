@@ -5,8 +5,8 @@ const dotsContainer = document.querySelector(".carousel-dots");
 const carouselWindow = document.querySelector(".carousel-window");
 
 const originalTotalImages = originalImages.length; // Number of *real* images
-const clonesBefore = 3; // Number of clones added to the beginning in HTML
-const clonesAfter = 3;  // Number of clones added to the end in HTML
+const clonesBefore = 2; // Number of clones added to the beginning in HTML
+const clonesAfter = 2;  // Number of clones added to the end in HTML
 
 // currentIndex will now refer to the index of the *original* image
 let currentIndex = 0; // Starts at the first original image
@@ -92,8 +92,7 @@ prevButton.addEventListener('click', () => {
         const windowWidth = carouselWindow.offsetWidth;
 
         track.style.transition = 'none'; // Disable transition for instant jump
-        let tempOffset = ((clonesBefore - 1) * itemWidthWithGap) + (imageWidth / 2) - (windowWidth / 2);
-        track.style.transform = `translateX(-${tempOffset}px)`;
+let tempOffset = ((clonesBefore - 1) * itemWidthWithGap) + (imageWidth / 2) - (windowWidth / 2);        track.style.transform = `translateX(-${tempOffset}px)`;
 
         // Allow browser to render the instant jump, then enable transition for the next actual move
         requestAnimationFrame(() => {
@@ -118,8 +117,7 @@ nextButton.addEventListener('click', () => {
         const windowWidth = carouselWindow.offsetWidth;
 
         track.style.transition = 'none'; // Disable transition for instant jump
-        let tempOffset = ((originalTotalImages + clonesBefore) * itemWidthWithGap) + (imageWidth / 2) - (windowWidth / 2);
-        track.style.transform = `translateX(-${tempOffset}px)`;
+let tempOffset = ((originalTotalImages + clonesBefore) * itemWidthWithGap) + (imageWidth / 2) - (windowWidth / 2);        track.style.transform = `translateX(-${tempOffset}px)`;
 
         // Allow browser to render the instant jump, then enable transition for the next actual move
         requestAnimationFrame(() => {
