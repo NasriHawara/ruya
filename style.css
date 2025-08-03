@@ -93,7 +93,7 @@ header {
 
 /* ===== Intro Banner (Above Slider) ===== */
 .intro-banner {
-    background-image: url('../images/bgx1.JPG');
+    background-image: url('bgx1.JPG');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Optional: adds a parallax effect */
@@ -657,7 +657,7 @@ footer {
 
     @media (max-width: 488px) {
         .intro-banner {
-    background-image: url('../images/bgx2.JPG');
+    background-image: url('bgx2.JPG');
 }
     }
 }
@@ -3006,3 +3006,4 @@ input:invalid:not(:focus):not(:placeholder-shown) {
         margin-top: 20px;
     }
 }
+
