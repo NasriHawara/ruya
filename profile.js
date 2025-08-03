@@ -59,7 +59,7 @@ function renderFavoriteProductCard(product, userId) {
         <div class="favorite-product-image-wrapper">
             <picture>
                 <source srcset="${product.imageWebpUrl}" type="image/webp">
-                <img src="${product.imageFallbackUrl}" alt="${product.name}" class="favorite-product-image">
+                <img src="${product.imageUrl}" alt="${product.name}" class="favorite-product-image">
             </picture>
         </div>
         <div class="favorite-product-info">
@@ -244,3 +244,4 @@ onAuthStateChanged(auth, async (user) => {
         window.location.href = 'login.html';
     }
 });
+
