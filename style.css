@@ -93,7 +93,7 @@ header {
 
 /* ===== Intro Banner (Above Slider) ===== */
 .intro-banner {
-    background-image: url('bgx1.JPG');
+    background-image: url('../images/bgx1.JPG');
     background-size: cover;
     background-position: center;
     background-attachment: fixed; /* Optional: adds a parallax effect */
@@ -276,11 +276,12 @@ header {
     flex-shrink: 0;
     transform: scale(0.9);
     transition: transform 0.3s ease, filter 0.3s ease;
+    padding-bottom: 15px;
 }
 
 .carousel-image.active {
     filter: brightness(100%);
-    transform: scale(1);
+    transform: scale(1.4);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -348,9 +349,9 @@ header {
 
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 30px;
-    max-width: 1000px;
+    max-width: 1150px;
     margin: auto;
 }
 
@@ -366,6 +367,10 @@ header {
     border-radius: 8px;
     overflow: hidden;
     transition: 0.3s ease;
+    display: flex; /* NEW */
+    flex-direction: column; /* NEW */
+
+    
 }
 
 .category-card:hover {
@@ -375,8 +380,9 @@ header {
 
 .category-card img {
     width: 100%;
-    height: 500px;
-    object-fit: cover;
+    height: auto; /* CHANGED from 100% */
+    aspect-ratio: 1; /* Keeps square ratio */
+    object-fit: contain;
 }
 
 .category-card h3 {
@@ -587,12 +593,28 @@ footer {
     }
 
     /* Featured Section */
-    .featured {
-        padding: 40px 20px;
+ .featured {
+        padding: 30px 15px; /* Slightly reduced padding for more space */
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+        gap: 20px;
+        max-width: 100%; /* Full width on mobile */
+    }
+
+    .category-card {
+        width: 100%; /* Full width cards */
+        margin: 0; /* Remove auto margins */
     }
 
     .category-card img {
-        height: 200px; /* Adjust height for category images */
+        aspect-ratio: 1; /* Keep square */
+        width: 100% !important; /* Force full width */
+        height: auto !important; /* Flexible height */
+        min-height: 300px; /* Minimum size */
+        max-height: 70vh; /* Maximum size (70% of screen) */
+        object-fit: contain; /* Show full image */
     }
 
     /* Footer */
@@ -635,7 +657,7 @@ footer {
 
     @media (max-width: 488px) {
         .intro-banner {
-    background-image: url('bgx2.JPG');
+    background-image: url('../images/bgx2.JPG');
 }
     }
 }
@@ -996,9 +1018,12 @@ footer {
     max-width: 100%;    /* Allow image to take full width of container */
     height: 100%;   /* Allow image to take full height of container */
     object-fit: contain; 
-    transform: scale(2);
+    transform: scale(1.4);
     display: block; /*  remove extra space below image */
     transition: transform 0.3s ease; /*  for hover effects */
+    transform-origin: center center; /* Forces scaling from true center */
+    object-position: center; /* Ensures contain/cover stays centered */
+    will-change: transform; /* Optimizes GPU rendering */
 }
 
 .product-card:hover .product-image-wrapper img {
@@ -1274,10 +1299,27 @@ footer {
 
     /* Shop Page Specific - Mobile Icons (NEW) */
     .product-card .product-actions {
-        transform: translateY(0); /* Make always visible on mobile */
-        opacity: 1; /* Make always visible on mobile */
-        pointer-events: auto; /* Make always interactive on mobile */
+    position: absolute;
+    top: 10px; /* Position them near the top-right corner */
+    right: 10px;
+    bottom: auto; /* Remove the bottom positioning */
+    left: auto;
+    width: auto; /* Allow the container to shrink to fit the buttons */
+    display: flex;
+    flex-direction: column; /* Stack buttons vertically */
+    justify-content: flex-start;
+    gap: 8px; /* Reduce gap between buttons */
+    background-color: transparent; /* Remove the semi-transparent bar */
+    padding: 0;
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+    transition: none; /* Disable transition for a static, cleaner look on mobile */
+    border-top: none;
     }
+
+    
+    
 
     /* Footer (from previous section) */
     footer {
@@ -1357,6 +1399,8 @@ footer {
     .product-grid {
         grid-template-columns: 1fr; /* Single column for product cards on mobile */
         gap: 20px;
+        width: 80%;
+        margin: auto;
     }
 
     .product-card .product-image-wrapper {
@@ -1416,13 +1460,22 @@ footer {
 .main-product-image {
     width: 100%;
     margin-bottom: 15px;
+    overflow: hidden; /* Contains the scaled image */
+    position: relative; /* For precise positioning */
+    height: 0; /* Let content determine height */
+    padding-top: 66.66%; 
 }
 
 .main-product-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: auto;
-    display: block; /* Removes extra space below image */
-    border-radius: 5px; /* Slightly rounded corners */
+    height: 100%;
+    object-fit: contain;
+    transform: scale(2.8);
+    transform-origin: top center; /* Scale from top */
+    margin-top: -75%; /* Pull image up (adjust this value) */
 }
 
 .thumbnail-images {
@@ -1598,7 +1651,20 @@ footer {
     /* Product Detail Page Specific */
     .product-detail-main {
         padding: 30px 15px;
+        }
+
+    .product-detail-container {
+    justify-content: center; /* Center content if there's extra space */
+    margin-top: 50px;
+}
+    .product-image-gallery{
+        align-items: center !important; /* Force center alignment */
+        padding: 0 5%; /* Add side padding */
+        width: 100%;
+        max-width: none; /* Remove desktop max-width */
     }
+
+    
 
     .product-detail-container {
         flex-direction: column; /* Stack columns vertically on small screens */
