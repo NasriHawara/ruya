@@ -9,7 +9,7 @@
     --font-01: Verdana, Geneva, Tahoma, sans-serif;
     --font-02: 'Times New Roman', Times, serif;
     --font-03:'Parisienne', cursive;
-    --global-color-0: #EADED0; /* Background color */
+    --global-color-0: #77835f; /* Background color */
     --global-color-1: #8C9A8C; /* Main accent color (e.g., links, buttons) */
     --global-color-2: #C7AF94; /* Secondary accent color (e.g., hover states) */
     --global-color-white: #FFFFFF; /* Added for explicit white */
@@ -21,7 +21,7 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: var(--global-color-0); /* Using variable */
-    color: #333; /* Default text color */
+    color: white; /* White text color for visibility on dark background */
 }
 
 /* --- Section Spacing --- */
@@ -172,7 +172,7 @@ header {
 .brand-story .story-content {
     max-width: 900px; /* Limit width for readability of long text */
     margin: 0 auto; /* Center the content */
-    color: #333; /* Darker text for readability on white background */
+    color: white; /* White text color for visibility on dark background */
 }
 
 .brand-story h2 {
@@ -181,7 +181,7 @@ header {
     margin-top: 100px;
     font-family: var(--font-01); /* Your primary font */
     font-weight: bold;
-    color: var(--global-color-1); /* Dark color for heading */
+    color: white; /* White text color for visibility on dark background */
     position: relative; /* For the optional underline */
     display: inline-block; /* For centering underline */
 }
@@ -200,7 +200,7 @@ header {
 .brand-story p {
     font-size: clamp(1em, 1.8vw, 1.5em); /* Responsive paragraph font size */
     line-height: 1.8; /* Improved line spacing for readability */
-    color: var(--global-color-1); /* Lighter dark gray for body text */
+    color: white; /* White text color for visibility on dark background */
     font-family: var(--font-01);
     text-decoration: dashed; /* This might be unusual, confirm if intended */
 }
@@ -211,12 +211,13 @@ header {
     text-align: center;
     margin-top: 200px;
     margin-bottom: 20px; /* Spacing below this title */
+    color: white;
 }
 
 .section-title h2,
 .featured h2 { /* Apply similar styles to existing h2 in featured section */
     font-size: 32px;
-    color:var(--global-color-1);
+    color: #fff; /* White text color for visibility on dark background */
     font-family: var(--font-01);
     font-weight: bold;
     position: relative;
@@ -232,6 +233,7 @@ header {
     background: var(--global-color-1); /* Using variable */
     margin: 10px auto 0;
     border-radius: 2px;
+    color: white;
 }
 
 
@@ -244,6 +246,7 @@ header {
     justify-content: center;
     align-items: center;
     position: relative;
+    color: white; /* White text color for visibility on dark background */
 }
 
 .carousel-inner {
@@ -344,7 +347,7 @@ header {
 /* Updated to use .section-title h2 for consistency */
 .featured h2 {
     margin-bottom: 40px;
-    color:var(--global-color-1); /* Keep specific margin for this h2 */
+    color:white; /* Keep specific margin for this h2 */
 }
 
 .category-grid {
@@ -388,7 +391,7 @@ header {
 .category-card h3 {
     margin: 15px 0;
     font-size: 18px;
-    color: var(--global-color-1);
+    color: white; /* White text color for visibility on dark background */
 }
 
 /* ===== Footer (Merged with Contact Info) ===== */
@@ -712,13 +715,13 @@ footer {
 .shop-banner h1 {
     font-size: 3.5em; /* Adjust font size as needed */
     margin-bottom: 10px;
-    color: var(--global-color-1); /* Darker color for heading */
+    color: white; /* White text color for visibility on dark background */
 }
 
 .shop-banner p {
     font-size: 1.5em; /* Adjust font size as needed */
     line-height: 1.5;
-    color: var(--global-color-1); /* Slightly lighter color for paragraph */
+    color: white; /* White text color for visibility on dark background */
 }
 
 
@@ -959,6 +962,7 @@ footer {
 .products-top-bar .sort-options label {
     margin-right: 10px;
     font-weight: 500;
+    color: white;
 }
 
 .products-top-bar select {
@@ -975,6 +979,11 @@ footer {
     background-repeat: no-repeat;
     background-position: right 8px center;
     background-size: 12px;
+}
+
+/* Results count styling */
+.results-count {
+    color: white;
 }
 
 /* --- Product Grid --- */
@@ -1191,6 +1200,7 @@ footer {
         align-items: flex-start;
         gap: 15px;
         padding: 15px 0;
+        color: white;
     }
 
     .products-top-bar .sort-options {
@@ -1198,10 +1208,12 @@ footer {
         display: flex; /* Align label and select */
         align-items: center;
         justify-content: space-between;
+        color: white;
     }
     .products-top-bar select {
         flex-grow: 1; /* Allow select to grow */
         max-width: 200px; /* Limit max width */
+        color: white;
     }
 
     .product-grid {
@@ -1712,6 +1724,7 @@ footer {
 .cart-page-container {
     padding: 60px 0; /* Vertical padding for the entire cart page */
     background-color: var(--global-color-0); /* A light background for the page */
+    color: white; /* White text color for visibility on dark background */
 }
 
 .cart-content-wrapper {
@@ -2194,6 +2207,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
 .checkout-page-container {
     padding: 60px 0; /* Vertical padding for the entire checkout page */
     background-color: var(--global-color-0); /* A light background for the page */
+    color: white; /* White text color for visibility on dark background */
 }
 
 .checkout-content-wrapper {
@@ -2590,6 +2604,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
 .profile-page-container {
     padding: 60px 0; /* Vertical padding consistent with other pages */
     background-color: var(--global-color-0); /* Light background for the page */
+    color: white; /* White text color for visibility on dark background */
 }
 
 /* Styling for the main sections (profile-card, order-history, favorites) */
@@ -2804,6 +2819,7 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     display: flex; /* Use flexbox to center the form wrapper */
     align-items: center; /* Vertically center the form wrapper */
     justify-content: center; /* Horizontally center the form wrapper */
+    color: white; /* White text color for visibility on dark background */
 }
 
 /* Styling for the central form wrapper (the "card" containing the form) */
@@ -3004,6 +3020,73 @@ input:invalid:not(:focus):not(:placeholder-shown) {
     .auth-switch {
         font-size: 0.9em;
         margin-top: 20px;
+    }
+}
+
+/* ===== WhatsApp Floating Button ===== */
+.whatsapp-float {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    background-color: #25D366;
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    animation: pulse 2s infinite;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    color: white;
+}
+
+.whatsapp-float:active {
+    transform: scale(0.95);
+}
+
+/* Pulse animation for the WhatsApp button */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+    50% {
+        box-shadow: 0 4px 25px rgba(37, 211, 102, 0.6);
+    }
+    100% {
+        box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+}
+
+/* Responsive adjustments for WhatsApp button */
+@media (max-width: 768px) {
+    .whatsapp-float {
+        width: 55px;
+        height: 55px;
+        font-size: 28px;
+        bottom: 25px;
+        right: 25px;
+    }
+}
+
+@media (max-width: 576px) {
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        font-size: 25px;
+        bottom: 20px;
+        right: 20px;
     }
 }
 
